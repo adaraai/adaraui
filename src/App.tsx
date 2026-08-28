@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
 
@@ -10,15 +10,14 @@ const Government = lazy(() => import("./pages/Government"));
 const Customers = lazy(() => import("./pages/Customers"));
 const Documentation = lazy(() => import("./pages/Documentation"));
 const Resources = lazy(() => import("./pages/Resources"));
+const News = lazy(() => import("./pages/News"));
+const NewsPost = lazy(() => import("./pages/NewsPost"));
 const Api = lazy(() => import("./pages/Api"));
 const Support = lazy(() => import("./pages/Support"));
 const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
 const RequestQuota = lazy(() => import("./pages/RequestQuota"));
 const Learn = lazy(() => import("./pages/Learn"));
-const ClientDashboard = lazy(() => import("./pages/ClientDashboard"));
-const LabelerDashboard = lazy(() => import("./pages/LabelerDashboard"));
-const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 function PageLoader() {
@@ -39,15 +38,17 @@ function App() {
             <Route path="/customers" element={<Customers />} />
             <Route path="/documentation" element={<Documentation />} />
             <Route path="/resources" element={<Resources />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:slug" element={<NewsPost />} />
             <Route path="/api" element={<Api />} />
             <Route path="/support" element={<Support />} />
             <Route path="/learn" element={<Learn />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/request-quota" element={<RequestQuota />} />
-            <Route path="/client-dashboard" element={<ClientDashboard />} />
-            <Route path="/labeler-dashboard" element={<LabelerDashboard />} />
-            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/client-dashboard" element={<Navigate to="/" replace />} />
+            <Route path="/labeler-dashboard" element={<Navigate to="/" replace />} />
+            <Route path="/admin-dashboard" element={<Navigate to="/" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

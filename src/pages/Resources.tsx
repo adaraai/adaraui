@@ -1,5 +1,5 @@
-import { ComingSoon } from "@/components/client/ComingSoon";
+import { Navigate } from "react-router-dom";
 
 export default function Resources() {
-  return <ComingSoon />;
+  return <Navigate to="/news" replace />;
 }

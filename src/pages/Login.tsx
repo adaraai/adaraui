@@ -1,22 +1,18 @@
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   AuthShell,
   AuthSocialButtons,
   authInputClassName,
-  authSelectClassName,
   authSubmitClassName,
 } from "@/components/client/AuthShell";
 
 export default function Login() {
-  const [role, setRole] = useState("client");
   const navigate = useNavigate();
 
   function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (role === "client") navigate("/client-dashboard");
-    else if (role === "labeler") navigate("/labeler-dashboard");
-    else navigate("/admin-dashboard");
+    navigate("/");
   }
 
   return (
@@ -65,23 +61,6 @@ export default function Login() {
           placeholder="Enter your password"
           className={authInputClassName}
         />
-        <select
-          id="role"
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          className={authSelectClassName}
-          aria-label="Workspace"
-        >
-          <option value="client" className="bg-background">
-            Client workspace
-          </option>
-          <option value="labeler" className="bg-background">
-            Labeler workspace
-          </option>
-          <option value="admin" className="bg-background">
-            Admin workspace
-          </option>
-        </select>
         <button type="submit" className={authSubmitClassName}>
           Continue with email
         </button>
