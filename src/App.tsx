@@ -41,7 +41,7 @@ function PageLoader() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="system" storageKey="adara-ui-theme">
+      <ThemeProvider defaultTheme="dark" storageKey="adara-ui-theme">
         <TooltipProvider>
           <Toaster />
           <Sonner />

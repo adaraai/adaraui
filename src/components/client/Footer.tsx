@@ -68,7 +68,7 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Logo size="sm" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground sm:max-w-sm sm:text-base">
-              Teaching AI to understand Africa in its languages, its logic, and its lived reality.
+              AI for African languages and context.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-2.5">

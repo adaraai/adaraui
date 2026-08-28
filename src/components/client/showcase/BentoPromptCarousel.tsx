@@ -16,7 +16,7 @@ const prompts = [
   },
 ];
 
-export function BentoPromptCarousel() {
+export function BentoPromptCarousel({ compact = false }: { compact?: boolean }) {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -32,6 +32,26 @@ export function BentoPromptCarousel() {
   }, []);
 
   const prompt = prompts[index];
+
+  if (compact) {
+    return (
+      <div className="flex h-full min-h-0 flex-col justify-start overflow-hidden px-4 pt-3 pb-0">
+        <div
+          className={cn(
+            "space-y-2.5 transition-opacity duration-300",
+            visible ? "opacity-100" : "opacity-0"
+          )}
+        >
+          <div className="rounded-2xl bg-muted/45 px-3 py-2">
+            <p className="text-[13px] leading-snug text-foreground">{prompt.title}</p>
+          </div>
+          <p className="line-clamp-3 px-0.5 text-[13px] leading-relaxed text-muted-foreground">
+            {prompt.body}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-full min-h-0 flex-col p-5 sm:p-6">

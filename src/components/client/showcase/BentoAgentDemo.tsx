@@ -37,11 +37,11 @@ export function BentoAgentDemo() {
 
   return (
     <div className="flex h-full min-h-0 flex-col p-5 sm:p-6">
-      <div className="mb-4 min-h-[8.75rem] shrink-0 space-y-2">
+      <div className="mb-4 min-h-[8.75rem] shrink-0 space-y-3">
         {tasks.map((task) => (
           <div
             key={`${setIndex}-${task.label}`}
-            className="flex h-10 items-center justify-between gap-3 rounded-lg border border-border bg-muted/30 px-3 font-mono text-[11px] sm:text-xs"
+            className="flex items-center justify-between gap-3 font-mono text-[11px] sm:text-xs"
           >
             <span className="truncate text-foreground/80">{task.label}</span>
             <span className="flex shrink-0 items-center gap-2">
@@ -52,12 +52,12 @@ export function BentoAgentDemo() {
         ))}
       </div>
 
-      <div className="mt-auto shrink-0 space-y-2 border-t border-border pt-4">
+      <div className="mt-auto shrink-0 space-y-2 pt-4">
         <div className="flex h-5 items-center gap-2 font-mono text-[11px] text-muted-foreground">
-          <span className="text-violet-600 dark:text-violet-300/90">◆</span>
+          <span className="text-white/70">◆</span>
           <span>Thought for {(2.4 + setIndex * 0.7).toFixed(1)}s</span>
         </div>
-        <div className="h-10 rounded-lg border border-border bg-muted/40 px-3 py-2 font-mono text-[11px] leading-none text-muted-foreground">
+        <div className="font-mono text-[11px] leading-relaxed text-muted-foreground">
           <span className="text-muted-foreground/50">▸</span> read_file corpus/sw-KE/annotations.json
         </div>
       </div>

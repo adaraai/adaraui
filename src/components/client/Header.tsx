@@ -39,18 +39,18 @@ export function Header() {
   }, [isMenuOpen]);
 
   const navigationItems = [
-    { label: "Platform", href: "/products" },
-    { label: "Customers", href: "/customers" },
-    { label: "Enterprise", href: "/enterprise" },
-    { label: "Government", href: "/government" },
-    { label: "Learn", href: "/learn" },
+    { label: "Products", href: "/products" },
+    { label: "API", href: "/api" },
+    { label: "Docs", href: "/documentation" },
+    { label: "About", href: "/about" },
   ];
 
   const moreDropdownItems = [
-    { label: "About", href: "/about" },
-    { label: "Documentation", href: "/documentation" },
-    { label: "API Reference", href: "/api" },
+    { label: "Customers", href: "/customers" },
+    { label: "Enterprise", href: "/enterprise" },
+    { label: "Government", href: "/government" },
     { label: "Support", href: "/support" },
+    { label: "Learn", href: "/learn" },
   ];
 
   const navLink = cn(
@@ -69,7 +69,7 @@ export function Header() {
         "fixed left-0 right-0 top-0 z-50 border-b transition-all duration-300 safe-area-top",
         scrolled
           ? "border-border/60 bg-background/80 backdrop-blur-xl"
-          : "border-border/30 bg-background/62 backdrop-blur-md dark:border-white/[0.06] dark:bg-[#060912]/55 dark:backdrop-blur-xl"
+          : "border-white/[0.06] bg-background/55 backdrop-blur-xl"
       )}
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -130,9 +130,9 @@ export function Header() {
             </Link>
             <Link
               to="/signup"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-5 text-[15px] font-medium text-background transition-colors duration-150 hover:bg-foreground/90 dark:bg-white dark:text-[#050816] dark:hover:bg-white/90"
+              className="inline-flex h-11 items-center justify-center rounded-full bg-white px-5 text-[15px] font-medium text-neutral-950 transition-colors duration-150 hover:bg-white/90"
             >
-              Get a Demo
+              Try ADARA
             </Link>
           </div>
 
@@ -195,10 +195,10 @@ export function Header() {
             </Link>
             <Link
               to="/signup"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-white px-4 text-base font-medium text-[#050816] transition hover:bg-white/90"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-white px-4 text-base font-medium text-neutral-950 transition hover:bg-white/90"
               onClick={() => setIsMenuOpen(false)}
             >
-              Get a Demo
+              Try ADARA
             </Link>
           </div>
         </nav>

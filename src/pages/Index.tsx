@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Header } from "@/components/client/Header";
 import { Hero } from "@/components/client/Hero";
-import { ExploreBentoSection } from "@/components/client/ExploreBentoSection";
 import { Reveal } from "@/components/client/Reveal";
 
 const FeaturesSection = lazy(() =>
@@ -19,6 +18,11 @@ const FAQSection = lazy(() =>
 const CtaSection = lazy(() =>
   import("@/components/client/CtaSection").then((m) => ({ default: m.CtaSection }))
 );
+const LatestNewsSection = lazy(() =>
+  import("@/components/client/LatestNewsSection").then((m) => ({
+    default: m.LatestNewsSection,
+  }))
+);
 const ContactForm = lazy(() =>
   import("@/components/client/ContactForm").then((m) => ({ default: m.ContactForm }))
 );
@@ -35,7 +39,6 @@ const Index = () => {
     <div className="min-h-screen overflow-x-clip bg-background">
       <Header />
       <Hero />
-      <ExploreBentoSection />
       <main className="adara-ambient">
         <Suspense fallback={<SectionFallback minHeight="32rem" />}>
           <Reveal>
@@ -60,6 +63,11 @@ const Index = () => {
         <Suspense fallback={<SectionFallback minHeight="22rem" />}>
           <Reveal delay={120}>
             <CtaSection />
+          </Reveal>
+        </Suspense>
+        <Suspense fallback={<SectionFallback minHeight="24rem" />}>
+          <Reveal delay={130}>
+            <LatestNewsSection />
           </Reveal>
         </Suspense>
         <Suspense fallback={<SectionFallback minHeight="28rem" />}>

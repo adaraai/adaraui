@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { type ReactNode } from "react";
+import { Children, cloneElement, isValidElement, type ReactNode } from "react";
 
 type MarqueeProps = {
   children: ReactNode;
@@ -14,8 +14,26 @@ export function Marquee({
   direction = "ltr",
   duration = 45,
   className,
-  gapClassName = "gap-3 sm:gap-4",
+  gapClassName = "gap-4 sm:gap-5",
 }: MarqueeProps) {
+  const items = Children.toArray(children);
+
+  const renderTrack = (copy: "a" | "b") => (
+    <div
+      className={cn("flex shrink-0", gapClassName, "pe-4 sm:pe-5")}
+      aria-hidden={copy === "b" ? true : undefined}
+    >
+      {items.map((child, index) => {
+        if (isValidElement(child)) {
+          return cloneElement(child, {
+            key: `${copy}-${String(child.key ?? index)}`,
+          });
+        }
+        return child;
+      })}
+    </div>
+  );
+
   return (
     <div className={cn("overflow-hidden", className)}>
       <div
@@ -25,10 +43,8 @@ export function Marquee({
         )}
         style={{ animationDuration: `${duration}s` }}
       >
-        <div className={cn("flex shrink-0", gapClassName)}>{children}</div>
-        <div className={cn("flex shrink-0", gapClassName)} aria-hidden>
-          {children}
-        </div>
+        {renderTrack("a")}
+        {renderTrack("b")}
       </div>
     </div>
   );
