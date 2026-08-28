@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/client/Logo";
+import { useTheme } from "@/components/ThemeProvider";
 
 export function Header() {
+  const { resolvedTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -54,8 +56,8 @@ export function Header() {
   const navLink = cn(
     "text-[15px] font-normal transition-colors duration-150",
     scrolled
-      ? "text-muted-foreground hover:text-foreground dark:text-muted-foreground dark:hover:text-foreground"
-      : "text-white/80 hover:text-white"
+      ? "text-muted-foreground hover:text-foreground"
+      : "text-muted-foreground hover:text-foreground dark:text-white/80 dark:hover:text-white"
   );
 
   const mobileNavLink =
@@ -66,14 +68,14 @@ export function Header() {
       className={cn(
         "fixed left-0 right-0 top-0 z-50 border-b transition-all duration-300 safe-area-top",
         scrolled
-          ? "border-border/60 bg-background/75 backdrop-blur-xl"
-          : "border-transparent bg-transparent"
+          ? "border-border/60 bg-background/80 backdrop-blur-xl"
+          : "border-border/30 bg-background/62 backdrop-blur-md dark:border-white/[0.06] dark:bg-[#060912]/55 dark:backdrop-blur-xl"
       )}
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between sm:h-[4.25rem]">
           <div className="flex min-w-0 items-center gap-8">
-            <Logo onDark={!scrolled} className="relative z-10" />
+            <Logo onDark={!scrolled && resolvedTheme === "dark"} className="relative z-10" />
 
             <nav className="hidden items-center gap-7 lg:flex">
               {navigationItems.map((item) => (
@@ -121,14 +123,14 @@ export function Header() {
                 "inline-flex h-11 items-center justify-center rounded-full border px-5 text-[15px] font-medium transition-colors duration-150",
                 scrolled
                   ? "border-border text-foreground hover:bg-accent"
-                  : "border-white/25 text-white hover:border-white/40 hover:bg-white/5"
+                  : "border-border text-foreground hover:bg-accent dark:border-white/25 dark:text-white dark:hover:border-white/40 dark:hover:bg-white/5"
               )}
             >
               Sign in
             </Link>
             <Link
               to="/signup"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-white px-5 text-[15px] font-medium text-[#050816] transition-colors duration-150 hover:bg-white/90"
+              className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-5 text-[15px] font-medium text-background transition-colors duration-150 hover:bg-foreground/90 dark:bg-white dark:text-[#050816] dark:hover:bg-white/90"
             >
               Get a Demo
             </Link>
@@ -139,7 +141,7 @@ export function Header() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={cn(
               "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg transition touch-manipulation lg:hidden",
-              scrolled ? "text-foreground hover:bg-accent" : "text-white hover:bg-white/10"
+              scrolled ? "text-foreground hover:bg-accent" : "text-foreground hover:bg-accent dark:text-white dark:hover:bg-white/10"
             )}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}

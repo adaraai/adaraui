@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Header } from "@/components/client/Header";
 import { Hero } from "@/components/client/Hero";
+import { ExploreBentoSection } from "@/components/client/ExploreBentoSection";
 import { Reveal } from "@/components/client/Reveal";
 
 const FeaturesSection = lazy(() =>
@@ -34,6 +35,7 @@ const Index = () => {
     <div className="min-h-screen overflow-x-clip bg-background">
       <Header />
       <Hero />
+      <ExploreBentoSection />
       <main className="adara-ambient">
         <Suspense fallback={<SectionFallback minHeight="32rem" />}>
           <Reveal>

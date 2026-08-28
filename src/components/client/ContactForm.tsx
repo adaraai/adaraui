@@ -65,10 +65,7 @@ export function ContactForm() {
   return (
     <section id="contact" className="section-auto bg-background py-20 sm:py-28">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
-          Contact
-        </p>
-        <h2 className="mt-4 text-[clamp(2.25rem,4.5vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.03em] text-foreground">
+        <h2 className="text-[clamp(2.25rem,4.5vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.03em] text-foreground">
           Get in touch
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">

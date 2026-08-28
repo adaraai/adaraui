@@ -63,11 +63,11 @@ const features: {
 
 const cardVariants = [
   { duration: 5.5, direction: "normal" as const, delay: 0, accent: 2 },
+  { duration: 6.5, direction: "normal" as const, delay: 0.8, accent: 3 },
+  { duration: 6.8, direction: "reverse" as const, delay: 1.6, accent: 2 },
+  { duration: 7.5, direction: "reverse" as const, delay: 0.4, accent: 3 },
+  { duration: 5.9, direction: "normal" as const, delay: 2.2, accent: 2 },
   { duration: 7.2, direction: "reverse" as const, delay: 1.2, accent: 3 },
-  { duration: 6.8, direction: "normal" as const, delay: 2.4, accent: 2 },
-  { duration: 8.5, direction: "reverse" as const, delay: 0.8, accent: 3 },
-  { duration: 5.9, direction: "normal" as const, delay: 3.1, accent: 2 },
-  { duration: 7.8, direction: "reverse" as const, delay: 1.9, accent: 3 },
 ];
 
 export function FeaturesSection() {
