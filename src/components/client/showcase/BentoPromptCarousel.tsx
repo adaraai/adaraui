@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useIsVisible } from "@/hooks/use-is-visible";
 
 const prompts = [
   {
@@ -17,25 +18,33 @@ const prompts = [
 ];
 
 export function BentoPromptCarousel({ compact = false }: { compact?: boolean }) {
+  const { ref, visible: onScreen } = useIsVisible<HTMLDivElement>();
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    if (!onScreen) return;
+
+    let timeout: number | undefined;
+    const interval = window.setInterval(() => {
       setVisible(false);
-      setTimeout(() => {
+      timeout = window.setTimeout(() => {
         setIndex((i) => (i + 1) % prompts.length);
         setVisible(true);
       }, 280);
     }, 4200);
-    return () => clearInterval(interval);
-  }, []);
+
+    return () => {
+      window.clearInterval(interval);
+      if (timeout) window.clearTimeout(timeout);
+    };
+  }, [onScreen]);
 
   const prompt = prompts[index];
 
   if (compact) {
     return (
-      <div className="flex h-full min-h-0 flex-col justify-start overflow-hidden px-4 pt-3 pb-0">
+      <div ref={ref} className="flex h-full min-h-0 flex-col justify-start overflow-hidden px-4 pt-3 pb-0">
         <div
           className={cn(
             "space-y-2.5 transition-opacity duration-300",
@@ -54,7 +63,7 @@ export function BentoPromptCarousel({ compact = false }: { compact?: boolean }) 
   }
 
   return (
-    <div className="flex h-full min-h-0 flex-col p-5 sm:p-6">
+    <div ref={ref} className="flex h-full min-h-0 flex-col p-5 sm:p-6">
       <div className="relative min-h-[7.5rem] flex-1">
         <div
           className={cn(

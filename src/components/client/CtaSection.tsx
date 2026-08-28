@@ -42,9 +42,14 @@ export function CtaSection() {
 
           <div className="relative min-h-[240px] w-full sm:min-h-[280px] md:min-h-full">
             <img
-              src="/assets/adara-cta.png"
+              src="/assets/adara-cta.webp"
               alt="ADARA context API on mobile"
               className="absolute inset-0 h-full w-full object-cover object-top sm:object-center"
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
+              width={960}
+              height={960}
               draggable={false}
             />
           </div>

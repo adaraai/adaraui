@@ -1,46 +1,22 @@
-import { useEffect, useState } from "react";
-
 type Task = {
   label: string;
   tag: string;
   status: "running" | "done" | "pending";
 };
 
-const taskSets: Task[][] = [
-  [
-    { label: "Find untranslated Yoruba UI strings", tag: "explore", status: "done" },
-    { label: "Fine-tune Twi speech model", tag: "build", status: "running" },
-    { label: "Audit corpus consent flags", tag: "general", status: "pending" },
-  ],
-  [
-    { label: "Map Pidgin commerce idioms", tag: "explore", status: "running" },
-    { label: "Add Hausa dialect metadata", tag: "build", status: "done" },
-    { label: "Review bias in health prompts", tag: "general", status: "running" },
-  ],
+const tasks: Task[] = [
+  { label: "Find untranslated Yoruba UI strings", tag: "explore", status: "done" },
+  { label: "Fine-tune Twi speech model", tag: "build", status: "running" },
+  { label: "Audit corpus consent flags", tag: "general", status: "pending" },
 ];
 
 export function BentoAgentDemo() {
-  const [setIndex, setSetIndex] = useState(0);
-  const [tick, setTick] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTick((t) => t + 1);
-      if (tick % 5 === 4) {
-        setSetIndex((i) => (i + 1) % taskSets.length);
-      }
-    }, 900);
-    return () => clearInterval(interval);
-  }, [tick]);
-
-  const tasks = taskSets[setIndex];
-
   return (
     <div className="flex h-full min-h-0 flex-col p-5 sm:p-6">
       <div className="mb-4 min-h-[8.75rem] shrink-0 space-y-3">
         {tasks.map((task) => (
           <div
-            key={`${setIndex}-${task.label}`}
+            key={task.label}
             className="flex items-center justify-between gap-3 font-mono text-[11px] sm:text-xs"
           >
             <span className="truncate text-foreground/80">{task.label}</span>
@@ -55,7 +31,7 @@ export function BentoAgentDemo() {
       <div className="mt-auto shrink-0 space-y-2 pt-4">
         <div className="flex h-5 items-center gap-2 font-mono text-[11px] text-muted-foreground">
           <span className="text-white/70">◆</span>
-          <span>Thought for {(2.4 + setIndex * 0.7).toFixed(1)}s</span>
+          <span>Thought for 2.4s</span>
         </div>
         <div className="font-mono text-[11px] leading-relaxed text-muted-foreground">
           <span className="text-muted-foreground/50">▸</span> read_file corpus/sw-KE/annotations.json

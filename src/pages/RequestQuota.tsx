@@ -29,8 +29,7 @@ export default function RequestQuota() {
       ...prev,
       [field]: value
     }));
-    
-    // Clear error when user starts typing
+
     if (errors[field]) {
       setErrors(prev => ({
         ...prev,
@@ -41,8 +40,7 @@ export default function RequestQuota() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate required fields
+
     const newErrors: {[key: string]: string} = {};
     
     if (!formData.companyName) newErrors.companyName = "Company name is required";
@@ -57,9 +55,7 @@ export default function RequestQuota() {
       setErrors(newErrors);
       return;
     }
-    
-    // Here you would typically send the data to your backend
-    console.log("Quota request submitted:", formData);
+
     setIsSubmitted(true);
   };
 
@@ -320,7 +316,7 @@ export default function RequestQuota() {
                     <div className="space-y-3">
                       <div className="flex items-center space-x-2">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span className="text-sm">Email: sales@labiloafrica.ai</span>
+                        <span className="text-sm">Email: sales@adara.ai</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>

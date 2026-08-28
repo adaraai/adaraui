@@ -8,7 +8,7 @@ type ThemeProviderProps = {
 
 export function ThemeProvider({
   children,
-  defaultTheme = "dark",
+  defaultTheme = "system",
   storageKey = "adara-ui-theme",
   ...props
 }: ThemeProviderProps) {
@@ -16,8 +16,8 @@ export function ThemeProvider({
     <NextThemesProvider
       attribute="class"
       defaultTheme={defaultTheme}
-      forcedTheme="dark"
-      enableSystem={false}
+      enableSystem
+      enableColorScheme
       storageKey={storageKey}
       disableTransitionOnChange
       {...props}

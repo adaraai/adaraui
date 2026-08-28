@@ -6,7 +6,6 @@ const LOGO_DARK = "/assets/adara-logo-dark.png";
 
 type LogoProps = {
   className?: string;
-  /** Header over hero imagery — white logo in light mode */
   onDark?: boolean;
   size?: "sm" | "md";
 };
@@ -26,6 +25,8 @@ export function Logo({ className, onDark = false, size = "md" }: LogoProps) {
         width={onDark ? 120 : 118}
         height={32}
         className={cn("w-auto dark:hidden", height)}
+        decoding="async"
+        fetchPriority="high"
         draggable={false}
       />
       <img
@@ -34,6 +35,7 @@ export function Logo({ className, onDark = false, size = "md" }: LogoProps) {
         width={120}
         height={32}
         className={cn("hidden w-auto dark:block", height)}
+        decoding="async"
         draggable={false}
       />
     </Link>
