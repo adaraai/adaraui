@@ -1,4 +1,5 @@
-import { Star } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { Marquee } from "@/components/client/Marquee";
 
 const testimonials1 = [
   {
@@ -7,47 +8,27 @@ const testimonials1 = [
     company: "Fintech Startup",
     quote:
       "Generic models fail our users in Pidgin and local finance contexts. ADARA's Africa Context layer is exactly the infrastructure we need.",
-    rating: 5,
   },
   {
     name: "James Mwangi",
     title: "Product Lead",
     company: "AgriTech Kenya",
     quote:
-      "Voice-first advice in Swahili for smallholder farmers changes everything. Western AI simply doesn't understand our crops or markets.",
-    rating: 5,
+      "Voice first advice in Swahili for smallholder farmers changes everything. Western AI simply doesn't understand our crops or markets.",
   },
   {
     name: "Fatima Diallo",
     title: "Director",
     company: "Public Health NGO",
     quote:
-      "Local-language health communication finally feels accurate and culturally safe. Consent-first data collection is non-negotiable for us.",
-    rating: 5,
+      "Local language health communication finally feels accurate and culturally safe. Consent first data collection is essential for us.",
   },
   {
     name: "Kwesi Mensah",
     title: "Head of AI",
     company: "Regional Bank",
     quote:
-      "Mobile-money fraud patterns look nothing like card fraud. Security tuned to African languages and USSD scams is a real differentiator.",
-    rating: 5,
-  },
-  {
-    name: "Amara Okonkwo",
-    title: "CTO",
-    company: "Fintech Startup",
-    quote:
-      "Generic models fail our users in Pidgin and local finance contexts. ADARA's Africa Context layer is exactly the infrastructure we need.",
-    rating: 5,
-  },
-  {
-    name: "James Mwangi",
-    title: "Product Lead",
-    company: "AgriTech Kenya",
-    quote:
-      "Voice-first advice in Swahili for smallholder farmers changes everything. Western AI simply doesn't understand our crops or markets.",
-    rating: 5,
+      "Mobile money fraud patterns look nothing like card fraud. Security tuned to African languages and USSD scams is a real differentiator.",
   },
 ];
 
@@ -57,24 +38,21 @@ const testimonials2 = [
     title: "Localization Lead",
     company: "Global Platform",
     quote:
-      "Light UI translation was never enough. We need cultural and linguistic depth — ADARA is the partner we'd rather build with than against.",
-    rating: 5,
+      "Light UI translation was never enough. We need cultural and linguistic depth. ADARA is the partner we'd rather build with than against.",
   },
   {
     name: "Ibrahim Yusuf",
     title: "Researcher",
     company: "African NLP Lab",
     quote:
-      "Commercializing African NLP with community trust and attribution is rare. ADARA's hybrid research-and-product model is the right path.",
-    rating: 5,
+      "Commercializing African NLP with community trust and attribution is rare. ADARA's hybrid research and product model is the right path.",
   },
   {
     name: "Naledi Botha",
     title: "Policy Advisor",
     company: "Digital Ministry",
     quote:
-      "AI sovereignty isn't a slogan — it's local data, local languages, and local partners. ADARA understands the terrain.",
-    rating: 5,
+      "AI sovereignty isn't a slogan. It's local data, local languages, and local partners. ADARA understands the terrain.",
   },
   {
     name: "Chidi Adebayo",
@@ -82,23 +60,6 @@ const testimonials2 = [
     company: "EdTech Nigeria",
     quote:
       "Students learn better when AI tutors bridge local languages to English curricula. That's the gap ADARA is built to close.",
-    rating: 5,
-  },
-  {
-    name: "Sarah Chen",
-    title: "Localization Lead",
-    company: "Global Platform",
-    quote:
-      "Light UI translation was never enough. We need cultural and linguistic depth — ADARA is the partner we'd rather build with than against.",
-    rating: 5,
-  },
-  {
-    name: "Ibrahim Yusuf",
-    title: "Researcher",
-    company: "African NLP Lab",
-    quote:
-      "Commercializing African NLP with community trust and attribution is rare. ADARA's hybrid research-and-product model is the right path.",
-    rating: 5,
   },
 ];
 
@@ -108,30 +69,18 @@ function TestimonialCard({
   testimonial: (typeof testimonials1)[0];
 }) {
   return (
-    <article className="shrink-0 w-[300px] sm:w-[360px] rounded-2xl border border-gray-100 bg-white shadow-sm p-5 flex flex-col gap-4">
-      <div className="flex gap-0.5">
-        {Array.from({ length: testimonial.rating }).map((_, i) => (
-          <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-        ))}
-      </div>
-      <p className="text-sm text-gray-600 leading-relaxed flex-1">
-        "{testimonial.quote}"
+    <article className="flex w-[min(calc(100vw-2.5rem),320px)] shrink-0 flex-col rounded-2xl border border-border bg-card p-5 sm:w-[380px] sm:p-6">
+      <p className="flex-1 text-sm leading-relaxed text-foreground sm:text-base md:text-lg">
+        {testimonial.quote}
       </p>
-      <div className="flex items-center gap-3 pt-3 border-t border-gray-50">
-        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-          {testimonial.name
-            .split(" ")
-            .map((n) => n[0])
-            .join("")}
-        </div>
+      <div className="mt-6 flex items-center justify-between pt-1">
         <div>
-          <p className="text-sm font-semibold text-gray-900 leading-tight">
-            {testimonial.name}
-          </p>
-          <p className="text-xs text-gray-400">
+          <p className="text-base font-medium text-foreground">{testimonial.name}</p>
+          <p className="mt-0.5 font-mono text-xs text-muted-foreground">
             {testimonial.title} · {testimonial.company}
           </p>
         </div>
+        <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/30" />
       </div>
     </article>
   );
@@ -139,48 +88,41 @@ function TestimonialCard({
 
 export function Testimonials() {
   return (
-    <section
-      id="testimonials"
-      className="bg-white py-20 sm:py-28 border-t border-gray-100"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+    <section id="testimonials" className="bg-background py-20 sm:py-28">
+      <div className="mx-auto mb-12 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">
-              Why it matters
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-gray-950 leading-[1.1]">
+            <h2 className="text-[clamp(2.25rem,4.5vw,3.5rem)] font-medium leading-[1.12] tracking-[-0.03em] text-foreground">
               Built for builders
               <br />
-              <span className="text-gray-400 font-medium">across Africa</span>
+              <span className="text-muted-foreground">across Africa</span>
             </h2>
           </div>
-          <p className="text-sm text-gray-400 max-w-xs">
-            From startups and banks to governments and NGOs — teams who need AI that actually understands Africa.
+          <p className="max-w-sm text-base leading-relaxed text-muted-foreground sm:text-lg">
+            From startups and banks to governments and NGOs, teams who need AI that
+            actually understands Africa.
           </p>
         </div>
       </div>
 
-      <div className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-40 bg-gradient-to-r from-white to-transparent z-10" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-40 bg-gradient-to-l from-white to-transparent z-10" />
+      <div className="relative overflow-x-clip">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-background to-transparent sm:w-32" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-background to-transparent sm:w-32" />
 
-        <div className="py-4">
-          <div className="flex gap-4 will-change-transform animate-marquee-ltr">
-            {testimonials1.map((t, i) => (
-              <TestimonialCard key={`r1-${i}`} testimonial={t} />
+        <div className="py-2">
+          <Marquee direction="ltr" duration={55}>
+            {testimonials1.map((t) => (
+              <TestimonialCard key={t.name} testimonial={t} />
             ))}
-          </div>
+          </Marquee>
         </div>
 
-        <div className="border-t border-gray-50" />
-
-        <div className="py-4">
-          <div className="flex gap-4 will-change-transform animate-marquee-rtl">
-            {testimonials2.map((t, i) => (
-              <TestimonialCard key={`r2-${i}`} testimonial={t} />
+        <div className="py-2">
+          <Marquee direction="rtl" duration={50}>
+            {testimonials2.map((t) => (
+              <TestimonialCard key={t.name} testimonial={t} />
             ))}
-          </div>
+          </Marquee>
         </div>
       </div>
     </section>

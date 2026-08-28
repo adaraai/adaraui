@@ -16,12 +16,12 @@ export function ComingSoon() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
 
       <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-gray-950 whitespace-nowrap">
-          Coming <span className="text-gray-300">Soon</span>
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-foreground whitespace-nowrap">
+          Coming <span className="text-muted-foreground">Soon</span>
         </h1>
 
         <div className="mt-10 w-full max-w-sm">
@@ -40,7 +40,7 @@ export function ComingSoon() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="flex items-center gap-2 bg-white border border-gray-200 rounded-full shadow-sm p-1.5 focus-within:border-gray-300 transition-all"
+              className="flex items-center gap-2 bg-card border border-border rounded-full shadow-sm p-1.5 focus-within:border-border transition-all"
             >
               <Bell className="w-4 h-4 text-gray-400 ml-2.5 flex-shrink-0" />
               <input
@@ -49,7 +49,7 @@ export function ComingSoon() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
-                className="flex-1 text-sm bg-transparent text-gray-700 placeholder-gray-400 outline-none min-w-0"
+                className="flex-1 text-sm bg-transparent text-foreground placeholder:text-muted-foreground outline-none min-w-0"
               />
               <button
                 type="submit"

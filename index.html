@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>ADARA AI Lab — Teaching AI to understand Africa</title>
     <meta name="description" content="ADARA AI Lab builds the data, models, and tools that make AI fluent in African languages, culture, commerce, and everyday life." />
     <meta name="author" content="ADARA AI Lab" />
@@ -10,6 +10,15 @@
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="shortcut icon" type="image/png" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
+
+    <link rel="preload" href="/assets/hero-bg.jpg" as="image" type="image/jpeg" fetchpriority="high" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
     <meta property="og:title" content="ADARA AI Lab — Teaching AI to understand Africa" />
     <meta property="og:description" content="Building foundational African-context datasets, models, and APIs so AI serves Africans in their own languages and on their own terms." />
@@ -19,6 +28,20 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@adaraailab" />
     <meta name="twitter:image" content="/placeholder.svg" />
+
+    <script>
+      (function () {
+        try {
+          var key = "adara-ui-theme";
+          var theme = localStorage.getItem(key);
+          var isDark =
+            theme === "dark" ||
+            ((theme === "system" || theme === null) &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.classList.toggle("dark", isDark);
+        } catch (e) {}
+      })();
+    </script>
   </head>
 
   <body>
