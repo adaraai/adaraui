@@ -25,12 +25,12 @@ const accentStops: Record<number, { rest: string; hover: string }> = {
     hover: "hsl(var(--foreground) / 0.5)",
   },
   2: {
-    rest: "hsl(265 60% 65% / 0.22)",
-    hover: "hsl(265 70% 72% / 0.65)",
+    rest: "hsl(0 0% 100% / 0.16)",
+    hover: "hsl(0 0% 100% / 0.5)",
   },
   3: {
-    rest: "hsl(195 90% 55% / 0.2)",
-    hover: "hsl(195 95% 65% / 0.58)",
+    rest: "hsl(0 0% 100% / 0.12)",
+    hover: "hsl(0 0% 100% / 0.42)",
   },
   4: {
     rest: "hsl(var(--foreground) / 0.11)",

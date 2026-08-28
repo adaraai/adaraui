@@ -44,11 +44,6 @@ export function AuthShell({
 }: AuthShellProps) {
   return (
     <div className="adara-ambient relative flex min-h-screen flex-col bg-background text-foreground">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100 dark:[background-image:radial-gradient(ellipse_at_50%_0%,hsl(var(--adara-glow-violet)/0.12),transparent_55%),radial-gradient(ellipse_at_100%_80%,hsl(var(--adara-glow-cyan)/0.08),transparent_45%)]"
-      />
-
       <Logo className="absolute left-4 top-[max(1.25rem,env(safe-area-inset-top))] z-10 sm:left-8" />
 
       <main className="relative flex flex-1 flex-col items-center justify-center px-4 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-28 sm:px-8">

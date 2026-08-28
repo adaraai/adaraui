@@ -3,72 +3,42 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 220 6% 42%;
-    --gray-out: 220 5% 48%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 0 0% 45%;
-    --radius: 0.5rem;
-    --sidebar: 240 5.9% 10%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 0 0% 98%;
-    --sidebar-primary-foreground: 240 5.9% 10%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
+  :root,
   .dark {
-    --background: 230 55% 5%;
-    --foreground: 210 40% 98%;
-    --card: 230 45% 8%;
-    --card-foreground: 210 40% 98%;
-    --popover: 230 45% 8%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 230 55% 5%;
-    --secondary: 230 40% 11%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 230 38% 11%;
-    --muted-foreground: 225 12% 62%;
-    --gray-out: 225 10% 58%;
-    --accent: 230 40% 13%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 230 32% 16%;
-    --input: 230 32% 16%;
-    --ring: 265 60% 65%;
+    --background: 0 0% 2%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 5.5%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 5.5%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 9%;
+    --muted-foreground: 0 0% 62%;
+    --gray-out: 0 0% 52%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 96%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 0 0% 85%;
     --radius: 0.5rem;
-    --sidebar: 230 45% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 210 40% 98%;
-    --sidebar-primary-foreground: 230 55% 5%;
-    --sidebar-accent: 230 40% 11%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 230 32% 16%;
-    --sidebar-ring: 265 60% 65%;
-    --adara-glow-violet: 270 70% 45%;
-    --adara-glow-cyan: 195 90% 45%;
-    --adara-glow-amber: 25 95% 55%;
-    --adara-hero-surface: 230 35% 5%;
+    --sidebar: 0 0% 5.5%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 9%;
+    --sidebar-accent-foreground: 0 0% 96%;
+    --sidebar-border: 0 0% 14%;
+    --sidebar-ring: 0 0% 85%;
+    --adara-glow-violet: 0 0% 100%;
+    --adara-glow-cyan: 0 0% 100%;
+    --adara-glow-amber: 0 0% 100%;
+    --adara-hero-surface: 0 0% 2%;
+    --adara-pink: 330 85% 68%;
   }
 }
 
@@ -78,6 +48,8 @@
   }
 
   html {
+    color-scheme: dark;
+    background-color: #050505;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -133,19 +105,7 @@
   }
 
   .dark .adara-ambient {
-    background-color: hsl(var(--adara-hero-surface));
-    background-image:
-      linear-gradient(
-        to bottom,
-        hsl(var(--adara-hero-surface)) 0%,
-        hsl(var(--adara-hero-surface)) 14%,
-        hsl(var(--background) / 0.55) 32%,
-        hsl(var(--background)) 48%,
-        hsl(var(--background)) 100%
-      ),
-      radial-gradient(ellipse 90% 50% at 50% 20%, hsl(var(--adara-glow-violet) / 0.1), transparent 55%),
-      radial-gradient(ellipse 50% 40% at 100% 28%, hsl(var(--adara-glow-cyan) / 0.06), transparent 50%),
-      radial-gradient(ellipse 45% 35% at 0% 65%, hsl(var(--adara-glow-amber) / 0.05), transparent 45%);
+    background-color: hsl(var(--background));
   }
 
   .section-auto {
@@ -195,6 +155,16 @@
     backface-visibility: hidden;
   }
 
+  @media (max-width: 639px) {
+    .hero-headline {
+      text-shadow: 0 1px 20px rgb(0 0 0 / 0.08);
+    }
+
+    .dark .hero-headline {
+      text-shadow: 0 2px 28px rgb(0 0 0 / 0.45);
+    }
+  }
+
   .hero-tech-pattern {
     z-index: 0;
   }
@@ -220,46 +190,31 @@
     opacity: 1;
   }
 
-  .hero-tech-dot {
-    fill: hsl(220 10% 50% / 0.42);
-  }
-
-  .hero-tech-stroke {
-    stroke: hsl(220 10% 52% / 0.3);
-  }
-
-  .hero-tech-trace {
-    stroke: hsl(330 72% 52% / 0.52);
-    fill: none;
-  }
-
-  .hero-tech-trace-dim {
-    stroke: hsl(220 10% 48% / 0.32);
-    fill: none;
-  }
-
-  .hero-tech-node-core {
-    fill: hsl(220 8% 42% / 0.55);
-  }
-
+  .hero-tech-dot,
   .dark .hero-tech-dot {
-    fill: hsl(225 16% 76% / 0.24);
+    fill: hsl(0 0% 100% / 0.18);
   }
 
+  .hero-tech-stroke,
   .dark .hero-tech-stroke {
-    stroke: hsl(225 16% 72% / 0.22);
+    stroke: hsl(0 0% 100% / 0.12);
   }
 
+  .hero-tech-trace,
   .dark .hero-tech-trace {
-    stroke: hsl(330 82% 68% / 0.48);
+    stroke: hsl(var(--adara-pink) / 0.55);
+    fill: none;
   }
 
+  .hero-tech-trace-dim,
   .dark .hero-tech-trace-dim {
-    stroke: hsl(225 16% 72% / 0.22);
+    stroke: hsl(0 0% 100% / 0.16);
+    fill: none;
   }
 
+  .hero-tech-node-core,
   .dark .hero-tech-node-core {
-    fill: hsl(225 16% 82% / 0.5);
+    fill: hsl(0 0% 100% / 0.45);
   }
 
   .interactive-scale {
@@ -386,11 +341,13 @@
 
 .animate-marquee-ltr:hover,
 .animate-marquee-rtl:hover,
-.animate-marquee-flags:hover,
 .animate-marquee-ltr:active,
-.animate-marquee-rtl:active,
-.animate-marquee-flags:active {
+.animate-marquee-rtl:active {
   animation-play-state: paused;
+}
+
+.animate-marquee-flags {
+  animation-play-state: running !important;
 }
 
 .animate-marquee-ltr {
@@ -405,7 +362,25 @@
 
 .animate-marquee-flags {
   animation-name: marquee-ltr;
-  animation-duration: 32s;
+  animation-duration: 45s;
+  will-change: transform;
+}
+
+.flag-marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {

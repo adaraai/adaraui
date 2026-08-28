@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>ADARA — Data and tools that make AI understand Africa</title>
     <meta name="description" content="ADARA builds African language corpora, specialized models, and developer APIs so AI understands Africa — in its languages, culture, commerce, and on its own terms." />
-    <meta name="author" content="ADARA" />
+    <meta name="theme-color" content="#050505" />
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -32,15 +32,7 @@
 
     <script>
       (function () {
-        try {
-          var key = "adara-ui-theme";
-          var theme = localStorage.getItem(key);
-          var isDark =
-            theme === "dark" ||
-            ((theme === "system" || theme === null) &&
-              window.matchMedia("(prefers-color-scheme: dark)").matches);
-          document.documentElement.classList.toggle("dark", isDark);
-        } catch (e) {}
+        document.documentElement.classList.add("dark");
       })();
     </script>
   </head>

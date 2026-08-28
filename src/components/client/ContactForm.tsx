@@ -4,26 +4,26 @@ import { ArrowUpRight } from "lucide-react";
 
 const contactPaths = [
   {
-    title: "Partnerships",
-    description: "Datasets, models, and applied products for startups, enterprise, and NGOs.",
-    href: "mailto:info@adara.ai?subject=Partnership%20inquiry",
+    title: "General",
+    description: "Questions about ADARA, our team, or working together.",
+    href: "mailto:info@adara.ai?subject=General%20inquiry",
     external: true,
   },
   {
     title: "API & product",
-    description: "Africa Context API access, documentation, and technical questions.",
+    description: "Technical questions, API access, and integration help.",
     href: "/documentation",
     external: false,
   },
   {
-    title: "Government",
-    description: "Public services, sovereignty, and B2G deployments in local languages.",
-    href: "mailto:info@adara.ai?subject=Government%20inquiry",
+    title: "Press",
+    description: "Media inquiries, speaking requests, and brand assets.",
+    href: "mailto:info@adara.ai?subject=Press%20inquiry",
     external: true,
   },
   {
     title: "Support",
-    description: "Help with pilot access, billing, or an existing integration.",
+    description: "Help with billing, access, or an existing integration.",
     href: "/support",
     external: false,
   },
@@ -69,7 +69,7 @@ export function ContactForm() {
           Get in touch
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Questions about ADARA, pilot access, enterprise support, or a partnership. We&apos;re here to help.
+          Questions, feedback, or support — we typically reply within 24 hours.
         </p>
 
         <div className="mt-14 grid gap-px overflow-hidden rounded-xl border border-border/50 bg-border/40 sm:grid-cols-2">
@@ -202,7 +202,7 @@ export function ContactForm() {
                 disabled={isSubmitting}
                 className="inline-flex h-12 w-full items-center justify-center rounded-full border border-foreground/20 px-8 font-mono text-xs uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-foreground hover:text-background disabled:opacity-50 sm:w-auto"
               >
-                {isSubmitting ? "Sending..." : "Contact us"}
+                {isSubmitting ? "Sending..." : "Send message"}
               </button>
             </form>
           )}

@@ -52,12 +52,8 @@ export function BentoChatDemo() {
             visible ? "opacity-100" : "opacity-0"
           )}
         >
-          <div className="min-h-[4.5rem] rounded-xl border border-border bg-muted/40 px-4 py-3">
-            <p className="text-sm leading-relaxed text-foreground">{slide.question}</p>
-          </div>
-          <div className="min-h-[5.5rem] rounded-xl border border-border bg-muted/25 px-4 py-3">
-            <p className="text-sm leading-relaxed text-muted-foreground">{slide.answer}</p>
-          </div>
+          <p className="text-sm leading-relaxed text-foreground">{slide.question}</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{slide.answer}</p>
         </div>
       </div>
 

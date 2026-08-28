@@ -7,28 +7,28 @@ const testimonials1 = [
     title: "CTO",
     company: "Fintech Startup",
     quote:
-      "Generic models fail our users in Pidgin and local finance contexts. ADARA's Africa Context layer is exactly the infrastructure we need.",
+      "Our Pidgin and local finance flows finally work. Generic models couldn't handle the context — ADARA could from day one.",
   },
   {
     name: "James Mwangi",
     title: "Product Lead",
     company: "AgriTech Kenya",
     quote:
-      "Voice first advice in Swahili for smallholder farmers changes everything. Western AI simply doesn't understand our crops or markets.",
+      "Voice advice in Swahili for smallholder farmers changed how our product works in the field. Western AI missed our crops entirely.",
   },
   {
     name: "Fatima Diallo",
     title: "Director",
     company: "Public Health NGO",
     quote:
-      "Local language health communication finally feels accurate and culturally safe. Consent first data collection is essential for us.",
+      "Health messages in Wolof and French finally read naturally. Our community teams trust the translations.",
   },
   {
     name: "Kwesi Mensah",
     title: "Head of AI",
     company: "Regional Bank",
     quote:
-      "Mobile money fraud patterns look nothing like card fraud. Security tuned to African languages and USSD scams is a real differentiator.",
+      "Mobile money fraud looks nothing like card fraud. ADARA catches USSD scam patterns our old tools never flagged.",
   },
 ];
 
@@ -38,28 +38,28 @@ const testimonials2 = [
     title: "Localization Lead",
     company: "Global Platform",
     quote:
-      "Light UI translation was never enough. We need cultural and linguistic depth. ADARA is the partner we'd rather build with than against.",
+      "Light UI translation wasn't enough. We needed cultural depth for West Africa — ADARA gave us that in weeks, not months.",
   },
   {
     name: "Ibrahim Yusuf",
     title: "Researcher",
     company: "African NLP Lab",
     quote:
-      "Commercializing African NLP with community trust and attribution is rare. ADARA's hybrid research and product model is the right path.",
+      "Rare to see African NLP done with community attribution built in. The corpus work is serious and the API is clean.",
   },
   {
     name: "Naledi Botha",
     title: "Policy Advisor",
     company: "Digital Ministry",
     quote:
-      "AI sovereignty isn't a slogan. It's local data, local languages, and local partners. ADARA understands the terrain.",
+      "Local languages in public services shouldn't be an afterthought. ADARA made it practical for our digital ID rollout.",
   },
   {
     name: "Chidi Adebayo",
     title: "Founder",
     company: "EdTech Nigeria",
     quote:
-      "Students learn better when AI tutors bridge local languages to English curricula. That's the gap ADARA is built to close.",
+      "Students learn better when tutors bridge Yoruba and English. ADARA closed that gap for us faster than we expected.",
   },
 ];
 
@@ -76,7 +76,7 @@ function TestimonialCard({
       <div className="mt-6 flex items-center justify-between pt-1">
         <div>
           <p className="text-base font-medium text-foreground">{testimonial.name}</p>
-          <p className="mt-0.5 font-mono text-xs text-muted-foreground">
+          <p className="mt-0.5 text-xs text-muted-foreground">
             {testimonial.title} · {testimonial.company}
           </p>
         </div>
@@ -93,14 +93,13 @@ export function Testimonials() {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-[clamp(2.25rem,4.5vw,3.5rem)] font-medium leading-[1.12] tracking-[-0.03em] text-foreground">
-              Built for builders
+              What teams
               <br />
-              <span className="text-gray-out">across Africa</span>
+              <span className="text-gray-out">are building</span>
             </h2>
           </div>
           <p className="max-w-sm text-base leading-relaxed text-muted-foreground sm:text-lg">
-            From startups and banks to governments and NGOs, teams who need AI that
-            actually understands Africa.
+            Developers, researchers, and public teams using ADARA to ship AI that works locally.
           </p>
         </div>
       </div>
@@ -109,7 +108,7 @@ export function Testimonials() {
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-background to-transparent sm:w-32" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-background to-transparent sm:w-32" />
 
-        <div className="py-2">
+        <div className="py-3">
           <Marquee direction="ltr" duration={55}>
             {testimonials1.map((t) => (
               <TestimonialCard key={t.name} testimonial={t} />
@@ -117,7 +116,7 @@ export function Testimonials() {
           </Marquee>
         </div>
 
-        <div className="py-2">
+        <div className="py-3">
           <Marquee direction="rtl" duration={50}>
             {testimonials2.map((t) => (
               <TestimonialCard key={t.name} testimonial={t} />

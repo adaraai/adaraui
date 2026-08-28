@@ -8,23 +8,23 @@ import {
 const faqs = [
   {
     q: "What is ADARA?",
-    a: "ADARA builds data, models, and APIs that help AI understand African languages, culture, and daily life for startups, enterprises, governments, and NGOs.",
+    a: "ADARA builds AI for African languages and context — corpus, models, API, and products that help any application understand local languages, culture, and daily life.",
   },
   {
-    q: "How does the Africa Context API work?",
-    a: "Send text or speech through our API and get translation, localization, and culturally grounded responses tuned to African locales without training your own models from scratch.",
+    q: "How does the Context API work?",
+    a: "Send text or speech through our API and get translation, localization, and culturally grounded responses tuned to African locales. No model training required.",
   },
   {
     q: "Is my data safe?",
-    a: "Yes. We use consent first collection, local data residency where possible, and never sell partner data. Community benefit sharing is built into how we work.",
+    a: "Yes. We use consent-first collection and never sell partner data. Details on data handling are in our documentation and privacy policy.",
   },
   {
-    q: "Do I need to fine tune my own models?",
-    a: "No. Many teams start with our context layer and specialized models via API. Custom fine tuning and corpus partnerships are available as you scale.",
+    q: "Do I need to fine-tune my own models?",
+    a: "No. Most teams start with our API and pre-trained models. Custom fine-tuning is available when you need it.",
   },
   {
     q: "How do I get started?",
-    a: "Join the pilot for free API access and documentation. Enterprise, research, and government partnerships get dedicated onboarding and SLA options.",
+    a: "Sign up for free API access and read the docs. Enterprise and government teams can reach out for dedicated support.",
   },
 ];
 
@@ -39,16 +39,15 @@ export function FAQSection() {
         <Accordion
           type="single"
           collapsible
-          defaultValue="item-0"
-          className="mt-8 divide-y divide-border/50 md:mt-12"
+          className="mt-10 w-full"
         >
-          {faqs.map((f, i) => (
-            <AccordionItem key={f.q} value={`item-${i}`} className="border-none">
-              <AccordionTrigger className="py-5 pr-2 text-left text-base font-normal hover:no-underline sm:py-6 sm:text-lg md:text-xl">
-                {f.q}
+          {faqs.map((faq, i) => (
+            <AccordionItem key={faq.q} value={`item-${i}`}>
+              <AccordionTrigger className="text-left text-base sm:text-lg">
+                {faq.q}
               </AccordionTrigger>
-              <AccordionContent className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {f.a}
+              <AccordionContent className="text-base leading-relaxed text-muted-foreground">
+                {faq.a}
               </AccordionContent>
             </AccordionItem>
           ))}
