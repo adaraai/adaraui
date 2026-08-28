@@ -29,12 +29,6 @@ export default defineConfig({
             if (id.includes("lucide-react")) {
               return "vendor-icons";
             }
-            if (id.includes("@tanstack")) {
-              return "vendor-query";
-            }
-            if (id.includes("recharts")) {
-              return "vendor-charts";
-            }
           }
         },
       },

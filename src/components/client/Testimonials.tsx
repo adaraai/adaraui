@@ -69,7 +69,7 @@ function TestimonialCard({
   testimonial: (typeof testimonials1)[0];
 }) {
   return (
-    <article className="flex w-[min(calc(100vw-2.5rem),320px)] shrink-0 flex-col rounded-2xl border border-border bg-card p-5 sm:w-[380px] sm:p-6">
+    <article className="flex w-[min(100%,320px)] shrink-0 flex-col rounded-2xl border border-border bg-card p-5 sm:w-[380px] sm:p-6">
       <p className="flex-1 text-sm leading-relaxed text-foreground sm:text-base md:text-lg">
         {testimonial.quote}
       </p>
@@ -89,8 +89,8 @@ function TestimonialCard({
 export function Testimonials() {
   return (
     <section id="testimonials" className="bg-background py-20 sm:py-28">
-      <div className="mx-auto mb-12 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mx-auto max-w-7xl min-w-0 px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-[clamp(2.25rem,4.5vw,3.5rem)] font-medium leading-[1.12] tracking-[-0.03em] text-foreground">
               What teams
@@ -102,26 +102,26 @@ export function Testimonials() {
             Developers, researchers, and public teams using ADARA to ship AI that works locally.
           </p>
         </div>
-      </div>
 
-      <div className="relative overflow-x-clip">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-background to-transparent sm:w-32" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-background to-transparent sm:w-32" />
+        <div className="relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-background to-transparent sm:w-16" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-background to-transparent sm:w-16" />
 
-        <div className="py-3">
-          <Marquee direction="ltr" duration={55}>
-            {testimonials1.map((t) => (
-              <TestimonialCard key={t.name} testimonial={t} />
-            ))}
-          </Marquee>
-        </div>
+          <div className="py-3">
+            <Marquee direction="ltr" duration={55}>
+              {testimonials1.map((t) => (
+                <TestimonialCard key={t.name} testimonial={t} />
+              ))}
+            </Marquee>
+          </div>
 
-        <div className="py-3">
-          <Marquee direction="rtl" duration={50}>
-            {testimonials2.map((t) => (
-              <TestimonialCard key={t.name} testimonial={t} />
-            ))}
-          </Marquee>
+          <div className="py-3">
+            <Marquee direction="rtl" duration={50}>
+              {testimonials2.map((t) => (
+                <TestimonialCard key={t.name} testimonial={t} />
+              ))}
+            </Marquee>
+          </div>
         </div>
       </div>
     </section>

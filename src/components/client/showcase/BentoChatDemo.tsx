@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useIsVisible } from "@/hooks/use-is-visible";
 
 const slides = [
   {
@@ -20,29 +21,37 @@ const slides = [
 ];
 
 export function BentoChatDemo() {
+  const { ref, visible: onScreen } = useIsVisible<HTMLDivElement>();
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    if (!onScreen) return;
+
+    let timeout: number | undefined;
+    const interval = window.setInterval(() => {
       setVisible(false);
-      setTimeout(() => {
+      timeout = window.setTimeout(() => {
         setIndex((i) => (i + 1) % slides.length);
         setVisible(true);
       }, 320);
     }, 4800);
-    return () => clearInterval(interval);
-  }, []);
+
+    return () => {
+      window.clearInterval(interval);
+      if (timeout) window.clearTimeout(timeout);
+    };
+  }, [onScreen]);
 
   const slide = slides[index];
 
   return (
-    <div className="flex h-full min-h-0 flex-col p-5 sm:p-6">
+    <div ref={ref} className="flex h-full min-h-0 flex-col p-5 sm:p-6">
       <div className="mb-4 flex shrink-0 items-center gap-2">
         <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
           Chat
         </span>
-        <span className="h-1 w-1 rounded-full bg-emerald-500/80 animate-pulse" />
+        <span className="h-1 w-1 rounded-full bg-emerald-500/80" />
       </div>
 
       <div className="relative min-h-[172px] flex-1">

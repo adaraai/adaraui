@@ -20,7 +20,7 @@ const posts: NewsPost[] = [
     title: "Adara Context API is now available",
     href: "/documentation",
     label: "Context API",
-    image: "/assets/adara-cta.png",
+    image: "/assets/adara-cta.webp",
     imagePosition: "center top",
     gradient: "from-orange-500/70 via-rose-600/30 to-violet-950/80",
   },
@@ -61,7 +61,8 @@ function NewsCard({ post }: { post: NewsPost }) {
             src={post.image}
             alt=""
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
             style={{ objectPosition: post.imagePosition ?? "center" }}
           />
         ) : null}

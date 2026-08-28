@@ -24,7 +24,8 @@ export function Header() {
 
   useEffect(() => {
     function handleScroll() {
-      setScrolled(window.scrollY > 12);
+      const next = window.scrollY > 12;
+      setScrolled((prev) => (prev === next ? prev : next));
     }
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
@@ -66,16 +67,14 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed left-0 right-0 top-0 z-50 border-b transition-all duration-300 safe-area-top",
-        scrolled
-          ? "border-border/60 bg-background/80 backdrop-blur-xl"
-          : "border-white/[0.06] bg-background/55 backdrop-blur-xl"
+        "fixed left-0 right-0 top-0 z-50 border-b bg-background transition-colors duration-200 safe-area-top",
+        scrolled ? "border-border/60" : "border-border/50"
       )}
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between sm:h-[4.25rem]">
           <div className="flex min-w-0 items-center gap-8">
-            <Logo onDark={!scrolled && resolvedTheme === "dark"} className="relative z-10" />
+            <Logo onDark={resolvedTheme === "dark"} className="relative z-10" />
 
             <nav className="hidden items-center gap-7 lg:flex">
               {navigationItems.map((item) => (
@@ -130,7 +129,7 @@ export function Header() {
             </Link>
             <Link
               to="/signup"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-white px-5 text-[15px] font-medium text-neutral-950 transition-colors duration-150 hover:bg-white/90"
+              className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-5 text-[15px] font-medium text-background transition-colors duration-150 hover:bg-foreground/90"
             >
               Try ADARA
             </Link>
@@ -195,7 +194,7 @@ export function Header() {
             </Link>
             <Link
               to="/signup"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-white px-4 text-base font-medium text-neutral-950 transition hover:bg-white/90"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-foreground px-4 text-base font-medium text-background transition hover:bg-foreground/90"
               onClick={() => setIsMenuOpen(false)}
             >
               Try ADARA

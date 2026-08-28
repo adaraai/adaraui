@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Children, cloneElement, isValidElement, type ReactNode } from "react";
+import { useOffscreenPause } from "@/hooks/use-offscreen-pause";
 
 type MarqueeProps = {
   children: ReactNode;
@@ -16,6 +17,7 @@ export function Marquee({
   className,
   gapClassName = "gap-4 sm:gap-5",
 }: MarqueeProps) {
+  const pauseRef = useOffscreenPause<HTMLDivElement>();
   const items = Children.toArray(children);
 
   const renderTrack = (copy: "a" | "b") => (
@@ -35,7 +37,7 @@ export function Marquee({
   );
 
   return (
-    <div className={cn("overflow-hidden", className)}>
+    <div ref={pauseRef} className={cn("overflow-hidden", className)}>
       <div
         className={cn(
           "flex w-max",
