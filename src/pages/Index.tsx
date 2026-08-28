@@ -31,10 +31,10 @@ function SectionFallback({ minHeight = "28rem" }: { minHeight?: string }) {
 
 const Index = () => {
   return (
-    <div className="min-h-screen overflow-x-clip adara-ambient">
+    <div className="min-h-screen overflow-x-clip bg-background">
       <Header />
-      <main>
-        <Hero />
+      <Hero />
+      <main className="adara-ambient">
         <Suspense fallback={<SectionFallback minHeight="32rem" />}>
           <Reveal>
             <FeaturesSection />

@@ -6,41 +6,34 @@ const LOGO_DARK = "/assets/adara-logo-dark.png";
 
 type LogoProps = {
   className?: string;
-  /** Hero header over dark imagery — use white logo in light mode */
+  /** Header over hero imagery — white logo in light mode */
   onDark?: boolean;
   size?: "sm" | "md";
 };
 
 export function Logo({ className, onDark = false, size = "md" }: LogoProps) {
-  const imageHeight = size === "sm" ? "h-6" : "h-7 sm:h-8";
+  const height = size === "sm" ? "h-[1.25rem] sm:h-6" : "h-7 sm:h-8";
 
   return (
-    <Link to="/" className={cn("inline-flex shrink-0 items-center select-none p-1 -m-1 touch-manipulation", className)}>
-      {onDark ? (
-        <img
-          src={LOGO_DARK}
-          alt="ADARA"
-          width={120}
-          height={32}
-          className={cn("w-auto object-contain dark:hidden", imageHeight)}
-          draggable={false}
-        />
-      ) : (
-        <img
-          src={LOGO_LIGHT}
-          alt="ADARA"
-          width={120}
-          height={32}
-          className={cn("w-auto object-contain dark:hidden", imageHeight)}
-          draggable={false}
-        />
-      )}
+    <Link
+      to="/"
+      aria-label="ADARA home"
+      className={cn("inline-flex shrink-0 items-center touch-manipulation", className)}
+    >
+      <img
+        src={onDark ? LOGO_DARK : LOGO_LIGHT}
+        alt="ADARA"
+        width={onDark ? 120 : 118}
+        height={32}
+        className={cn("w-auto dark:hidden", height)}
+        draggable={false}
+      />
       <img
         src={LOGO_DARK}
         alt="ADARA"
         width={120}
         height={32}
-        className={cn("hidden w-auto object-contain dark:block", imageHeight)}
+        className={cn("hidden w-auto dark:block", height)}
         draggable={false}
       />
     </Link>

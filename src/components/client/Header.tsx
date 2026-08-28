@@ -53,7 +53,9 @@ export function Header() {
 
   const navLink = cn(
     "text-[15px] font-normal transition-colors duration-150",
-    scrolled ? "text-muted-foreground hover:text-foreground" : "text-white/80 hover:text-white"
+    scrolled
+      ? "text-muted-foreground hover:text-foreground dark:text-muted-foreground dark:hover:text-foreground"
+      : "text-white/80 hover:text-white"
   );
 
   const mobileNavLink =
