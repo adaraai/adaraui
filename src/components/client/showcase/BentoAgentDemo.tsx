@@ -1,0 +1,81 @@
+import { useEffect, useState } from "react";
+
+type Task = {
+  label: string;
+  tag: string;
+  status: "running" | "done" | "pending";
+};
+
+const taskSets: Task[][] = [
+  [
+    { label: "Find untranslated Yoruba UI strings", tag: "explore", status: "done" },
+    { label: "Fine-tune Twi speech model", tag: "build", status: "running" },
+    { label: "Audit corpus consent flags", tag: "general", status: "pending" },
+  ],
+  [
+    { label: "Map Pidgin commerce idioms", tag: "explore", status: "running" },
+    { label: "Add Hausa dialect metadata", tag: "build", status: "done" },
+    { label: "Review bias in health prompts", tag: "general", status: "running" },
+  ],
+];
+
+export function BentoAgentDemo() {
+  const [setIndex, setSetIndex] = useState(0);
+  const [tick, setTick] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTick((t) => t + 1);
+      if (tick % 5 === 4) {
+        setSetIndex((i) => (i + 1) % taskSets.length);
+      }
+    }, 900);
+    return () => clearInterval(interval);
+  }, [tick]);
+
+  const tasks = taskSets[setIndex];
+
+  return (
+    <div className="flex h-full min-h-0 flex-col p-5 sm:p-6">
+      <div className="mb-4 min-h-[8.75rem] shrink-0 space-y-2">
+        {tasks.map((task) => (
+          <div
+            key={`${setIndex}-${task.label}`}
+            className="flex h-10 items-center justify-between gap-3 rounded-lg border border-border bg-muted/30 px-3 font-mono text-[11px] sm:text-xs"
+          >
+            <span className="truncate text-foreground/80">{task.label}</span>
+            <span className="flex shrink-0 items-center gap-2">
+              <span className="text-muted-foreground">{task.tag}</span>
+              <StatusBadge status={task.status} />
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-auto shrink-0 space-y-2 border-t border-border pt-4">
+        <div className="flex h-5 items-center gap-2 font-mono text-[11px] text-muted-foreground">
+          <span className="text-violet-600 dark:text-violet-300/90">◆</span>
+          <span>Thought for {(2.4 + setIndex * 0.7).toFixed(1)}s</span>
+        </div>
+        <div className="h-10 rounded-lg border border-border bg-muted/40 px-3 py-2 font-mono text-[11px] leading-none text-muted-foreground">
+          <span className="text-muted-foreground/50">▸</span> read_file corpus/sw-KE/annotations.json
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StatusBadge({ status }: { status: Task["status"] }) {
+  if (status === "done") {
+    return <span className="text-emerald-600 dark:text-emerald-400/90">[done]</span>;
+  }
+  if (status === "running") {
+    return (
+      <span className="inline-flex items-center gap-1 text-amber-600 dark:text-amber-300/90">
+        <span className="h-1 w-1 animate-pulse rounded-full bg-amber-500" />
+        [running]
+      </span>
+    );
+  }
+  return <span className="text-muted-foreground/60">[queued]</span>;
+}

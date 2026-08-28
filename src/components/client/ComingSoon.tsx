@@ -21,7 +21,7 @@ export function ComingSoon() {
 
       <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center text-center px-4">
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-foreground whitespace-nowrap">
-          Coming <span className="text-muted-foreground">Soon</span>
+          Coming <span className="text-gray-out">Soon</span>
         </h1>
 
         <div className="mt-10 w-full max-w-sm">

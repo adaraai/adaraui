@@ -15,7 +15,8 @@
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 220 6% 42%;
+    --gray-out: 220 5% 48%;
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
@@ -46,7 +47,8 @@
     --secondary: 230 40% 11%;
     --secondary-foreground: 210 40% 98%;
     --muted: 230 38% 11%;
-    --muted-foreground: 225 20% 65%;
+    --muted-foreground: 225 12% 62%;
+    --gray-out: 225 10% 58%;
     --accent: 230 40% 13%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
@@ -191,15 +193,73 @@
   .hero-content {
     transform: translateZ(0);
     backface-visibility: hidden;
-    color: #fff;
   }
 
-  .hero-headline {
-    color: #fff;
+  .hero-tech-pattern {
+    z-index: 0;
   }
 
-  .hero-subcopy {
-    color: rgb(255 255 255 / 0.85);
+  .hero-tech-pattern-svg {
+    position: absolute;
+    top: -1%;
+    right: -4%;
+    width: min(72vw, 600px);
+    height: min(72vw, 600px);
+    opacity: 0.95;
+    -webkit-mask-image:
+      linear-gradient(to left, #000 42%, transparent 100%),
+      linear-gradient(to bottom, #000 38%, transparent 100%);
+    mask-image:
+      linear-gradient(to left, #000 42%, transparent 100%),
+      linear-gradient(to bottom, #000 38%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  .dark .hero-tech-pattern-svg {
+    opacity: 1;
+  }
+
+  .hero-tech-dot {
+    fill: hsl(220 10% 50% / 0.42);
+  }
+
+  .hero-tech-stroke {
+    stroke: hsl(220 10% 52% / 0.3);
+  }
+
+  .hero-tech-trace {
+    stroke: hsl(330 72% 52% / 0.52);
+    fill: none;
+  }
+
+  .hero-tech-trace-dim {
+    stroke: hsl(220 10% 48% / 0.32);
+    fill: none;
+  }
+
+  .hero-tech-node-core {
+    fill: hsl(220 8% 42% / 0.55);
+  }
+
+  .dark .hero-tech-dot {
+    fill: hsl(225 16% 76% / 0.24);
+  }
+
+  .dark .hero-tech-stroke {
+    stroke: hsl(225 16% 72% / 0.22);
+  }
+
+  .dark .hero-tech-trace {
+    stroke: hsl(330 82% 68% / 0.48);
+  }
+
+  .dark .hero-tech-trace-dim {
+    stroke: hsl(225 16% 72% / 0.22);
+  }
+
+  .dark .hero-tech-node-core {
+    fill: hsl(225 16% 82% / 0.5);
   }
 
   .interactive-scale {
@@ -225,73 +285,6 @@
     transform: translate3d(0, -2px, 0);
   }
 
-  .hero-bg-image {
-    object-position: center 22%;
-    filter: blur(3px);
-    transform: scale(1.03);
-    transform-origin: center;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  .hero-bg-blur {
-    object-position: center 22%;
-    filter: blur(18px);
-    transform: scale(1.08);
-    transform-origin: center;
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      transparent 42%,
-      rgb(0 0 0 / 0.25) 58%,
-      rgb(0 0 0 / 0.72) 76%,
-      #000 100%
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      transparent 42%,
-      rgb(0 0 0 / 0.25) 58%,
-      rgb(0 0 0 / 0.72) 76%,
-      #000 100%
-    );
-  }
-
-  .dark .hero-bg-image {
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      #000 0%,
-      #000 78%,
-      rgb(0 0 0 / 0.88) 86%,
-      rgb(0 0 0 / 0.62) 92%,
-      rgb(0 0 0 / 0.28) 97%,
-      rgb(0 0 0 / 0) 100%
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      #000 0%,
-      #000 78%,
-      rgb(0 0 0 / 0.88) 86%,
-      rgb(0 0 0 / 0.62) 92%,
-      rgb(0 0 0 / 0.28) 97%,
-      rgb(0 0 0 / 0) 100%
-    );
-  }
-
-  .hero-scrim {
-    background: linear-gradient(
-      to bottom,
-      rgb(8 10 18 / 0.42) 0%,
-      rgb(8 10 18 / 0.16) 18%,
-      rgb(8 10 18 / 0.04) 36%,
-      transparent 54%
-    );
-  }
-
-  .hero-edge-fade {
-    display: none;
-  }
-
   .cta-dot-grid {
     opacity: 0.38;
     background-image: radial-gradient(
@@ -302,39 +295,35 @@
     background-size: 20px 20px;
   }
 
-  .dark .hero-scrim {
-    background:
-      rgb(0 0 0 / 0.28),
-      linear-gradient(
-        to bottom,
-        rgb(0 0 0 / 0.68) 0%,
-        rgb(0 0 0 / 0.32) 20%,
-        rgb(0 0 0 / 0.1) 45%,
-        transparent 58%
-      ),
-      linear-gradient(
-        to bottom,
-        transparent 58%,
-        rgb(6 9 18 / 0.35) 76%,
-        rgb(6 9 18 / 0.72) 88%,
-        rgb(6 9 18 / 0.95) 96%,
-        rgb(6 9 18) 100%
-      );
+  .bento-card-image {
+    filter: saturate(0.88) brightness(0.82) contrast(1.06);
+    transition: transform 0.7s ease-out, filter 0.5s ease;
   }
 
-  .dark .hero-edge-fade {
-    display: block;
-    z-index: 2;
-    height: clamp(11rem, 28vh, 17rem);
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(0 0 0 / 0.12) 16%,
-      rgb(6 9 18 / 0.38) 40%,
-      rgb(6 9 18 / 0.72) 62%,
-      rgb(6 9 18 / 0.92) 78%,
-      rgb(6 9 18) 100%
-    );
+  .group:hover .bento-card-image {
+    filter: saturate(0.95) brightness(0.88) contrast(1.08);
+  }
+
+  .bento-fade {
+    opacity: 0;
+  }
+
+  .bento-fade-visible {
+    opacity: 1;
+  }
+
+  .bento-cursor {
+    animation: bento-cursor-blink 1s step-end infinite;
+  }
+
+  @keyframes bento-cursor-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
 }
 
@@ -366,6 +355,11 @@
   .interactive-scale:active,
   .hover-lift:hover {
     transform: none;
+  }
+
+  .bento-cursor {
+    animation: none;
+    opacity: 0;
   }
 }
 
@@ -424,70 +418,42 @@
 }
 
 @keyframes border-beam-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-@property --beam-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes border-beam-angle {
-  to { --beam-angle: 360deg; }
-}
-
-.border-beam-ring {
-  --beam-angle: 0deg;
-  padding: 1px;
-  opacity: 0.45;
+.border-beam-spinner {
+  opacity: 0.5;
   background: conic-gradient(
-    from var(--beam-angle),
+    from 0deg,
     transparent 0deg,
-    transparent 272deg,
-    var(--beam-color, hsl(var(--foreground) / 0.1)) 308deg,
-    transparent 344deg
+    transparent 262deg,
+    var(--beam-color, hsl(var(--foreground) / 0.14)) 302deg,
+    transparent 342deg
   );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  animation: border-beam-angle var(--beam-duration, 6s) linear infinite;
-  animation-delay: var(--beam-delay, 0s);
-  transition:
-    opacity 0.4s ease,
-    padding 0.4s ease,
-    filter 0.4s ease;
+  animation: border-beam-spin var(--beam-duration, 6s) linear infinite;
+  transition: opacity 0.4s ease, filter 0.4s ease;
+  will-change: transform;
 }
 
-.group:hover .border-beam-ring {
+.group:hover .border-beam-spinner {
   opacity: 1;
-  padding: 1.5px;
-  filter: brightness(1.15);
+  filter: brightness(1.12);
   animation-duration: calc(var(--beam-duration, 6s) * 0.55);
   background: conic-gradient(
-    from var(--beam-angle),
+    from 0deg,
     transparent 0deg,
-    transparent 228deg,
-    var(--beam-color-hover, hsl(var(--foreground) / 0.55)) 268deg,
-    var(--beam-color-hover, hsl(var(--foreground) / 0.55)) 312deg,
+    transparent 248deg,
+    var(--beam-color-hover, hsl(var(--foreground) / 0.55)) 288deg,
+    var(--beam-color-hover, hsl(var(--foreground) / 0.55)) 318deg,
     transparent 352deg
   );
 }
 
-.border-beam-reverse {
-  animation-direction: reverse;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .border-beam-ring {
+  .border-beam-spinner {
     animation: none;
-    background: transparent;
+    opacity: 0;
   }
 }
 

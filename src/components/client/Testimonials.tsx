@@ -95,7 +95,7 @@ export function Testimonials() {
             <h2 className="text-[clamp(2.25rem,4.5vw,3.5rem)] font-medium leading-[1.12] tracking-[-0.03em] text-foreground">
               Built for builders
               <br />
-              <span className="text-muted-foreground">across Africa</span>
+              <span className="text-gray-out">across Africa</span>
             </h2>
           </div>
           <p className="max-w-sm text-base leading-relaxed text-muted-foreground sm:text-lg">
