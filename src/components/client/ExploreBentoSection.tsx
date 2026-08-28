@@ -133,19 +133,15 @@ export function ExploreBentoSection() {
 
         <BentoCard label="Coverage" href="/customers" className="h-full md:col-span-3">
           <div className="flex h-full min-h-0 flex-col p-5 sm:p-6">
-            <div className="flex min-h-0 flex-1 items-end justify-between gap-4">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                  Countries in scope
-                </p>
-                <p className="mt-2 text-4xl font-normal tracking-[-0.04em] text-foreground sm:text-5xl">
-                  54
-                </p>
-              </div>
-            </div>
-            <div className="mt-5 shrink-0">
+            <p className="shrink-0 whitespace-nowrap font-mono text-[10px] uppercase leading-none tracking-[0.08em] text-muted-foreground sm:text-[11px] sm:tracking-[0.12em]">
+              Countries in scope
+            </p>
+            <p className="mt-2 shrink-0 text-4xl font-normal leading-none tracking-[-0.04em] text-foreground">
+              54
+            </p>
+            <div className="mt-auto min-h-0 shrink-0 pt-4">
               <FlagMarquee />
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-3 text-sm leading-snug text-muted-foreground">
                 Pilot markets across West, East, and Southern Africa.
               </p>
             </div>
