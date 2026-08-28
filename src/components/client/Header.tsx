@@ -47,6 +47,7 @@ export function Header() {
   ];
 
   const moreDropdownItems = [
+    { label: "News", href: "/news" },
     { label: "Customers", href: "/customers" },
     { label: "Enterprise", href: "/enterprise" },
     { label: "Government", href: "/government" },
