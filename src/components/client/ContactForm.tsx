@@ -1,9 +1,44 @@
 import { useState } from "react";
-import { ArrowRight, Mail, Phone, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
+
+const contactPaths = [
+  {
+    title: "Partnerships",
+    description: "Datasets, models, and applied products for startups, enterprise, and NGOs.",
+    href: "mailto:info@adara.ai?subject=Partnership%20inquiry",
+    external: true,
+  },
+  {
+    title: "API & product",
+    description: "Africa Context API access, documentation, and technical questions.",
+    href: "/documentation",
+    external: false,
+  },
+  {
+    title: "Government",
+    description: "Public services, sovereignty, and B2G deployments in local languages.",
+    href: "mailto:info@adara.ai?subject=Government%20inquiry",
+    external: true,
+  },
+  {
+    title: "Support",
+    description: "Help with pilot access, billing, or an existing integration.",
+    href: "/support",
+    external: false,
+  },
+];
+
+const inputClassName =
+  "h-12 w-full rounded-full border border-border bg-background px-5 text-base text-foreground placeholder:text-muted-foreground/60 focus:border-foreground/25 focus:outline-none focus:ring-0";
+
+const textareaClassName =
+  "min-h-[140px] w-full resize-y rounded-3xl border border-border bg-background px-5 py-3.5 text-base text-foreground placeholder:text-muted-foreground/60 focus:border-foreground/25 focus:outline-none focus:ring-0";
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     company: "",
     message: "",
@@ -12,7 +47,7 @@ export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -23,184 +58,157 @@ export function ContactForm() {
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-      setFormData({ name: "", email: "", company: "", message: "" });
+      setFormData({ firstName: "", lastName: "", email: "", company: "", message: "" });
     }, 1000);
   };
 
   return (
-    <section id="contact" className="bg-[#FAFAFA] py-20 sm:py-28 border-t border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+    <section id="contact" className="section-auto bg-background py-20 sm:py-28">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
+          Contact
+        </p>
+        <h2 className="mt-4 text-[clamp(2.25rem,4.5vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.03em] text-foreground">
+          Get in touch
+        </h2>
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          Questions about ADARA, pilot access, enterprise support, or a partnership. We&apos;re here to help.
+        </p>
 
-          {/* Left */}
-          <div className="flex flex-col justify-between gap-10">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-6">
-                Contact
-              </div>
-              <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-gray-950 leading-[1.1] mb-5">
-                Build with us
-                <br />
-                <span className="text-gray-400 font-medium">on African AI</span>
-              </h2>
-              <p className="text-lg text-gray-500 leading-relaxed">
-                Partner on datasets, models, APIs, or flagship products. Whether you're a startup, enterprise, government, or NGO — let's talk.
-              </p>
-            </div>
-
-            <div className="space-y-5">
-              {[
-                {
-                  icon: Mail,
-                  label: "Email us",
-                  value: "info@adara.ai",
-                  href: "mailto:info@adara.ai",
-                },
-                {
-                  icon: Phone,
-                  label: "Call us",
-                  value: "+(233) 240 027 151",
-                  href: "tel:+233240027151",
-                },
-                {
-                  icon: Clock,
-                  label: "Availability",
-                  value: "24/7 support available",
-                  href: null,
-                },
-              ].map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.label} className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-center">
-                      <Icon className="w-4 h-4 text-gray-600" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-400 font-medium mb-0.5">{item.label}</p>
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          className="text-sm font-semibold text-gray-900 hover:text-blue-600 transition-colors"
-                        >
-                          {item.value}
-                        </a>
-                      ) : (
-                        <p className="text-sm font-semibold text-gray-900">{item.value}</p>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Right – form */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 sm:p-10">
-            {submitted ? (
-              <div className="h-full flex flex-col items-center justify-center text-center py-12">
-                <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mb-5">
-                  <svg className="w-7 h-7 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
+        <div className="mt-14 grid gap-px overflow-hidden rounded-xl border border-border/50 bg-border/40 sm:grid-cols-2">
+          {contactPaths.map((path) => {
+            const inner = (
+              <>
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="text-lg font-normal text-foreground">{path.title}</h3>
+                  <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground/50" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Message sent!</h3>
-                <p className="text-gray-500 text-sm">We'll get back to you within 24 hours.</p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="mt-6 text-sm text-blue-500 font-medium hover:text-blue-600 transition-colors"
-                >
-                  Send another message →
-                </button>
-              </div>
+                <p className="mt-2 text-base leading-relaxed text-muted-foreground">
+                  {path.description}
+                </p>
+              </>
+            );
+
+            const className =
+              "group block min-h-[5.5rem] bg-background p-5 transition-colors hover:bg-muted/20 sm:p-7";
+
+            return path.external ? (
+              <a key={path.title} href={path.href} className={className}>
+                {inner}
+              </a>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-2">
-                      Full Name <span className="text-gray-400">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder="Your name"
-                      className="w-full px-4 py-2.5 text-sm rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-2">
-                      Email <span className="text-gray-400">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder="you@company.com"
-                      className="w-full px-4 py-2.5 text-sm rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all"
-                    />
-                  </div>
-                </div>
+              <Link key={path.title} to={path.href} className={className}>
+                {inner}
+              </Link>
+            );
+          })}
+        </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-2">
-                    Company <span className="text-gray-400">(optional)</span>
+        <div className="mt-10 border-t border-border/50 pt-10 sm:mt-16 sm:pt-16">
+          <h3 className="text-2xl font-normal tracking-[-0.02em] text-foreground sm:text-3xl">
+            Contact us
+          </h3>
+
+          {submitted ? (
+            <div className="mt-10 max-w-xl rounded-lg border border-border bg-muted/20 px-6 py-8">
+              <p className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                Received
+              </p>
+              <p className="mt-3 text-lg text-foreground">Thanks. We&apos;ll reply within 24 hours.</p>
+              <button
+                type="button"
+                onClick={() => setSubmitted(false)}
+                className="mt-5 text-base text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+              >
+                Send another message
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="mt-10 max-w-2xl space-y-5">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <label htmlFor="firstName" className="text-base text-foreground">
+                    First name <span className="text-muted-foreground">*</span>
                   </label>
                   <input
+                    id="firstName"
+                    name="firstName"
                     type="text"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleChange}
-                    placeholder="Your Company"
-                    className="w-full px-4 py-2.5 text-sm rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-2">
-                    Message <span className="text-gray-400">*</span>
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
                     required
-                    rows={5}
-                    placeholder="Tell us about your use case — localization, API, research partnership, or applied product..."
-                    className="w-full px-4 py-2.5 text-sm rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all resize-none"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className={inputClassName}
                   />
                 </div>
+                <div className="space-y-2">
+                  <label htmlFor="lastName" className="text-base text-foreground">
+                    Last name <span className="text-muted-foreground">*</span>
+                  </label>
+                  <input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    required
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className={inputClassName}
+                  />
+                </div>
+              </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="inline-flex items-center justify-center gap-2 w-full py-3 px-6 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 disabled:opacity-60 transition-all duration-150"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="animate-spin w-4 h-4 text-white" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                      </svg>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <ArrowRight className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-base text-foreground">
+                  Work email <span className="text-muted-foreground">*</span>
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={inputClassName}
+                />
+              </div>
 
-                <p className="text-xs text-gray-400 text-center">
-                  We typically respond within 24 hours.
-                </p>
-              </form>
-            )}
-          </div>
+              <div className="space-y-2">
+                <label htmlFor="company" className="text-base text-foreground">
+                  Company name
+                </label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  value={formData.company}
+                  onChange={handleChange}
+                  className={inputClassName}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="message" className="text-base text-foreground">
+                  How can we help? <span className="text-muted-foreground">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                  className={textareaClassName}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-flex h-12 w-full items-center justify-center rounded-full border border-foreground/20 px-8 font-mono text-xs uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-foreground hover:text-background disabled:opacity-50 sm:w-auto"
+              >
+                {isSubmitting ? "Sending..." : "Contact us"}
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </section>

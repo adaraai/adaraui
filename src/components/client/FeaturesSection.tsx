@@ -1,131 +1,110 @@
-import { Database, Brain, Code2, Smartphone, Shield, Languages } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
+import {
+  ApiIcon,
+  CorpusIcon,
+  GovernanceIcon,
+  ModelsIcon,
+  ProductsIcon,
+  SecurityIcon,
+} from "@/components/client/FeatureIcons";
+import { BorderBeamCard } from "@/components/client/BorderBeamCard";
 
-const features = [
+type FeatureIcon = ComponentType<SVGProps<SVGSVGElement>>;
+
+const features: {
+  icon: FeatureIcon;
+  title: string;
+  description: string;
+  tags: string[];
+}[] = [
   {
-    icon: Database,
+    icon: CorpusIcon,
     title: "Data & Corpus",
     description:
-      "African language corpora and cultural context datasets — customs, idioms, commerce patterns — built with local researchers and communities.",
+      "African language corpora and cultural context datasets, including customs, idioms, and commerce patterns, built with local researchers and communities.",
     tags: ["Language corpus", "Cultural knowledge", "Annotation network"],
-    accent: "blue",
   },
   {
-    icon: Brain,
+    icon: ModelsIcon,
     title: "Specialized Models",
     description:
-      "Fine-tuned LLMs and speech models for African languages — plus a cultural-context layer that makes any base model more Africa-aware.",
-    tags: ["Fine-tuned LLMs", "Speech", "Context layer"],
-    accent: "purple",
+      "Fine tuned LLMs and speech models for African languages, plus a cultural context layer that makes any base model more Africa aware.",
+    tags: ["Fine tuned LLMs", "Speech", "Context layer"],
   },
   {
-    icon: Code2,
+    icon: ApiIcon,
     title: "Africa Context API",
     description:
-      "Developer tools that plug African understanding into any product — translation, localization, and culturally grounded responses.",
+      "Developer tools that plug African understanding into any product: translation, localization, and culturally grounded responses.",
     tags: ["API", "Localization", "Developers"],
-    accent: "green",
   },
   {
-    icon: Smartphone,
+    icon: ProductsIcon,
     title: "Applied Products",
     description:
-      "Flagship tools that prove value — from WhatsApp assistants for traders to voice-first agricultural advice in local languages.",
+      "Flagship tools that prove value, from WhatsApp assistants for traders to voice first agricultural advice in local languages.",
     tags: ["SME tools", "Agriculture", "Education"],
-    accent: "orange",
   },
   {
-    icon: Shield,
+    icon: SecurityIcon,
     title: "AI Security",
     description:
-      "Fraud, scam, and deepfake detection tuned to African languages and mobile-money patterns — protecting users where global tools fail.",
+      "Fraud, scam, and deepfake detection tuned to African languages and mobile money patterns, protecting users where global tools fail.",
     tags: ["Fraud detection", "Deepfakes", "Moderation"],
-    accent: "rose",
   },
   {
-    icon: Languages,
+    icon: GovernanceIcon,
     title: "Ethical Governance",
     description:
-      "Consent-first data collection, community benefit-sharing, local data residency, and bias review for sensitive domains.",
-    tags: ["Consent-first", "Sovereignty", "Trust"],
-    accent: "teal",
+      "Consent first data collection, community benefit sharing, local data residency, and bias review for sensitive domains.",
+    tags: ["Consent first", "Sovereignty", "Trust"],
   },
 ];
 
-const accentMap: Record<string, { bg: string; icon: string; badge: string }> = {
-  blue:   { bg: "bg-blue-50",   icon: "text-blue-600",   badge: "bg-blue-100 text-blue-700" },
-  purple: { bg: "bg-purple-50", icon: "text-purple-600", badge: "bg-purple-100 text-purple-700" },
-  green:  { bg: "bg-green-50",  icon: "text-green-600",  badge: "bg-green-100 text-green-700" },
-  orange: { bg: "bg-orange-50", icon: "text-orange-600", badge: "bg-orange-100 text-orange-700" },
-  rose:   { bg: "bg-rose-50",   icon: "text-rose-600",   badge: "bg-rose-100 text-rose-700" },
-  teal:   { bg: "bg-teal-50",   icon: "text-teal-600",   badge: "bg-teal-100 text-teal-700" },
-};
+const cardVariants = [
+  { duration: 5.5, direction: "normal" as const, delay: 0, accent: 2 },
+  { duration: 7.2, direction: "reverse" as const, delay: 1.2, accent: 3 },
+  { duration: 6.8, direction: "normal" as const, delay: 2.4, accent: 2 },
+  { duration: 8.5, direction: "reverse" as const, delay: 0.8, accent: 3 },
+  { duration: 5.9, direction: "normal" as const, delay: 3.1, accent: 2 },
+  { duration: 7.8, direction: "reverse" as const, delay: 1.9, accent: 3 },
+];
 
 export function FeaturesSection() {
   return (
-    <section id="features" className="bg-white py-20 sm:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-5">
-            Products & services
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-gray-950 leading-[1.1]">
-            From foundation
-            <br />
-            <span className="text-blue-500">to applied AI</span>
-          </h2>
-          <p className="mt-5 text-lg text-gray-500 max-w-xl mx-auto leading-relaxed">
-            Layered from data and models to APIs and products — so African
-            language, culture, and daily life become legible to AI.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {features.map((feature) => {
-            const colors = accentMap[feature.accent];
+    <section id="features" className="section-auto bg-background py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div
+              <BorderBeamCard
                 key={feature.title}
-                className="group relative flex flex-col bg-gray-50 border border-gray-100 rounded-2xl p-6 hover:border-gray-200 hover:shadow-lg hover:shadow-gray-100/80 transition-all duration-200"
+                variant={cardVariants[index]}
+                className="cursor-pointer"
               >
-                <div
-                  className={`w-10 h-10 rounded-xl ${colors.bg} flex items-center justify-center mb-5`}
-                >
-                  <Icon className={`w-5 h-5 ${colors.icon}`} />
+                <div className="mb-5 flex h-8 w-8 items-center justify-center sm:h-9 sm:w-9">
+                  <Icon />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="mb-2 text-lg font-semibold text-foreground sm:text-xl">
                   {feature.title}
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed flex-1">
+                <p className="flex-1 text-base leading-relaxed text-muted-foreground">
                   {feature.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mt-5">
+                <div className="mt-5 flex flex-wrap gap-2">
                   {feature.tags.map((tag) => (
                     <span
                       key={tag}
-                      className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold ${colors.badge}`}
+                      className="inline-flex items-center rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-              </div>
+              </BorderBeamCard>
             );
           })}
-        </div>
-
-        <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-px bg-gray-100 rounded-2xl overflow-hidden border border-gray-100">
-          {[
-            { value: "2,000+", label: "African languages" },
-            { value: "4", label: "Product layers" },
-            { value: "54", label: "Countries" },
-            { value: "1.5B", label: "People to serve" },
-          ].map((stat) => (
-            <div key={stat.label} className="bg-white px-6 py-6 text-center">
-              <p className="text-3xl font-bold text-gray-950">{stat.value}</p>
-              <p className="text-sm text-gray-500 mt-1 font-medium">{stat.label}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>
