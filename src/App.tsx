@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ScrollToTop } from "@/components/client/ScrollToTop";
 import Index from "./pages/Index";
 
 const About = lazy(() => import("./pages/About"));
@@ -18,6 +19,8 @@ const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
 const RequestQuota = lazy(() => import("./pages/RequestQuota"));
 const Learn = lazy(() => import("./pages/Learn"));
+const Privacy = lazy(() => import("./pages/Legal").then((m) => ({ default: m.Privacy })));
+const Terms = lazy(() => import("./pages/Legal").then((m) => ({ default: m.Terms })));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 function PageLoader() {
@@ -28,6 +31,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="adara-ui-theme">
       <BrowserRouter>
+        <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Index />} />
@@ -46,6 +50,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/request-quota" element={<RequestQuota />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="/client-dashboard" element={<Navigate to="/" replace />} />
             <Route path="/labeler-dashboard" element={<Navigate to="/" replace />} />
             <Route path="/admin-dashboard" element={<Navigate to="/" replace />} />

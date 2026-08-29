@@ -1,67 +1,85 @@
-import { ArrowRight, Bell } from "lucide-react";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Header } from "@/components/client/Header";
 import { Footer } from "@/components/client/Footer";
+import { WaitlistForm } from "@/components/client/WaitlistForm";
+
+const PAGE_COPY: Record<string, { name: string; description: string }> = {
+  "/products": {
+    name: "Products",
+    description: "Corpus, models, and applied tools will live here. Join the waitlist for the first release.",
+  },
+  "/api": {
+    name: "API",
+    description: "The Africa Context API reference isn’t published yet. We’ll email you when docs go live.",
+  },
+  "/documentation": {
+    name: "Documentation",
+    description: "Guides and references are on the way. Get notified when they ship.",
+  },
+  "/about": {
+    name: "About",
+    description: "The full story of ADARA is coming. Stay close for the launch.",
+  },
+  "/enterprise": {
+    name: "Enterprise",
+    description: "Dedicated capacity and support for teams. Waitlist for enterprise access.",
+  },
+  "/government": {
+    name: "Government",
+    description: "Public-sector programs aren’t open yet. We’ll reach out when they are.",
+  },
+  "/customers": {
+    name: "Customers",
+    description: "Customer stories will appear here. Join the list for updates.",
+  },
+  "/support": {
+    name: "Support",
+    description: "Help center isn’t live yet. For now, email info@adara.ai — or join the waitlist.",
+  },
+  "/learn": {
+    name: "Learn",
+    description: "Tutorials and courses are coming. We’ll tell you when the first ones drop.",
+  },
+  "/request-quota": {
+    name: "Enterprise access",
+    description: "Quota requests aren’t open yet. Leave your email and we’ll follow up.",
+  },
+};
 
 export function ComingSoon() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSubmitted(true);
-      setEmail("");
-    }
+  const { pathname } = useLocation();
+  const copy = PAGE_COPY[pathname] ?? {
+    name: "This page",
+    description: "This part of ADARA isn’t live yet. Join the waitlist and we’ll email you.",
   };
 
+  useEffect(() => {
+    document.title = `${copy.name} — Coming soon — ADARA`;
+    return () => {
+      document.title = "ADARA — Data and tools that make AI understand Africa";
+    };
+  }, [copy.name]);
+
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <Header />
 
-      <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-foreground whitespace-nowrap">
-          Coming <span className="text-gray-out">Soon</span>
+      <main className="flex flex-1 flex-col items-center justify-center px-4 pb-16 pt-[calc(6rem+env(safe-area-inset-top))] text-center">
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+          Coming soon
+        </p>
+        <h1 className="mt-4 text-[clamp(2.25rem,6vw,3.75rem)] font-semibold leading-[1.08] tracking-[-0.035em] text-foreground">
+          {copy.name}
         </h1>
+        <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
+          {copy.description}
+        </p>
 
-        <div className="mt-10 w-full max-w-sm">
-          {submitted ? (
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-9 h-9 rounded-full bg-green-50 border border-green-100 flex items-center justify-center">
-                <svg className="w-4 h-4 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </div>
-              <p className="text-sm font-medium text-gray-700">You're on the list!</p>
-              <button onClick={() => setSubmitted(false)} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">
-                Add another email →
-              </button>
-            </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="flex items-center gap-2 bg-card border border-border rounded-full shadow-sm p-1.5 focus-within:border-border transition-all"
-            >
-              <Bell className="w-4 h-4 text-gray-400 ml-2.5 flex-shrink-0" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                className="flex-1 text-sm bg-transparent text-foreground placeholder:text-muted-foreground outline-none min-w-0"
-              />
-              <button
-                type="submit"
-                className="flex-shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gray-900 text-white text-xs font-semibold hover:bg-gray-800 transition-all duration-150"
-              >
-                Notify me
-                <ArrowRight className="w-3 h-3" />
-              </button>
-            </form>
-          )}
+        <div className="mt-10 w-full max-w-sm text-left">
+          <WaitlistForm source={pathname} submitLabel="Notify me" />
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>
