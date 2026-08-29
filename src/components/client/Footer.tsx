@@ -112,13 +112,13 @@ export function Footer() {
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link
-              to="#"
+              to="/privacy"
               className="inline-block py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               Privacy Policy
             </Link>
             <Link
-              to="#"
+              to="/terms"
               className="inline-block py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               Terms of Service

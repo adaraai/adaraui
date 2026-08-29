@@ -43,8 +43,6 @@ export function ContactForm() {
     company: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -52,14 +50,13 @@ export function ContactForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFormData({ firstName: "", lastName: "", email: "", company: "", message: "" });
-    }, 1000);
+    const subject = encodeURIComponent("ADARA inquiry");
+    const body = encodeURIComponent(
+      `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nCompany: ${formData.company || "—"}\n\n${formData.message}`
+    );
+    window.location.href = `mailto:info@adara.ai?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -69,7 +66,7 @@ export function ContactForm() {
           Get in touch
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Questions, feedback, or support — we typically reply within 24 hours.
+          Email us directly, or send a message below — it opens your mail app so nothing is faked.
         </p>
 
         <div className="mt-14 grid gap-px overflow-hidden rounded-xl border border-border/50 bg-border/40 sm:grid-cols-2">
@@ -106,22 +103,7 @@ export function ContactForm() {
             Contact us
           </h3>
 
-          {submitted ? (
-            <div className="mt-10 max-w-xl rounded-lg border border-border bg-muted/20 px-6 py-8">
-              <p className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                Received
-              </p>
-              <p className="mt-3 text-lg text-foreground">Thanks. We&apos;ll reply within 24 hours.</p>
-              <button
-                type="button"
-                onClick={() => setSubmitted(false)}
-                className="mt-5 text-base text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-              >
-                Send another message
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="mt-10 max-w-2xl space-y-5">
+          <form onSubmit={handleSubmit} className="mt-10 max-w-2xl space-y-5">
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
                   <label htmlFor="firstName" className="text-base text-foreground">
@@ -199,13 +181,11 @@ export function ContactForm() {
 
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="inline-flex h-12 w-full items-center justify-center rounded-full border border-foreground/20 px-8 font-mono text-xs uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-foreground hover:text-background disabled:opacity-50 sm:w-auto"
+                className="inline-flex h-12 w-full items-center justify-center rounded-full border border-foreground/20 px-8 font-mono text-xs uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-foreground hover:text-background sm:w-auto"
               >
-                {isSubmitting ? "Sending..." : "Send message"}
+                Open email
               </button>
             </form>
-          )}
         </div>
       </div>
     </section>

@@ -1,70 +1,89 @@
-import { FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   AuthShell,
   AuthSocialButtons,
-  authInputClassName,
-  authSubmitClassName,
+  authSoonButtonClassName,
+  authSoonFieldClassName,
 } from "@/components/client/AuthShell";
+import { WaitlistForm } from "@/components/client/WaitlistForm";
 
 export default function Login() {
-  const navigate = useNavigate();
+  const [hint, setHint] = useState<string | null>(null);
 
-  function handleLogin(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    navigate("/");
+  function showSoon(feature: string) {
+    setHint(`${feature} isn’t available yet. Leave your email and we’ll notify you.`);
   }
 
   return (
     <AuthShell
       title="Sign in to ADARA"
-      description={
-        <>
-          Access your workspace, API keys, and project dashboards.
-          <br />
-          Sign in to continue building with African context.
-        </>
-      }
+      description="Accounts aren’t live yet. Click any field to see what’s coming — or join the waitlist below."
       alternateLink={{
-        prompt: "Don't have an account?",
-        label: "Get a demo",
+        prompt: "Want early access?",
+        label: "Join the waitlist",
         href: "/signup",
       }}
       legal={
         <>
           By continuing, you agree to ADARA&apos;s{" "}
-          <Link to="#" className="text-foreground/80 hover:text-foreground hover:underline underline-offset-4">
-            Terms of Service
+          <Link to="/terms" className="text-foreground/80 underline-offset-4 hover:text-foreground hover:underline">
+            Terms
           </Link>{" "}
           and{" "}
-          <Link to="#" className="text-foreground/80 hover:text-foreground hover:underline underline-offset-4">
+          <Link to="/privacy" className="text-foreground/80 underline-offset-4 hover:text-foreground hover:underline">
             Privacy Policy
           </Link>
           .
         </>
       }
     >
-      <AuthSocialButtons />
+      {hint ? (
+        <p className="rounded-2xl border border-border bg-muted/30 px-4 py-3 text-center text-sm text-foreground">
+          {hint}
+        </p>
+      ) : null}
 
-      <form onSubmit={handleLogin} className="space-y-3">
-        <input
-          id="email"
-          type="email"
-          required
-          placeholder="Enter your email"
-          className={authInputClassName}
-        />
-        <input
-          id="password"
-          type="password"
-          required
-          placeholder="Enter your password"
-          className={authInputClassName}
-        />
-        <button type="submit" className={authSubmitClassName}>
-          Continue with email
-        </button>
-      </form>
+      <AuthSocialButtons onUnavailable={(provider) => showSoon(`${provider} sign-in`)} />
+
+      <p className="py-1 text-center font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+        or email
+      </p>
+
+      <input
+        type="email"
+        readOnly
+        placeholder="Coming soon"
+        aria-label="Email — coming soon"
+        onFocus={(e) => {
+          e.target.blur();
+          showSoon("Email sign-in");
+        }}
+        className={authSoonFieldClassName}
+      />
+      <input
+        type="password"
+        readOnly
+        placeholder="Coming soon"
+        aria-label="Password — coming soon"
+        onFocus={(e) => {
+          e.target.blur();
+          showSoon("Password sign-in");
+        }}
+        className={authSoonFieldClassName}
+      />
+      <button
+        type="button"
+        onClick={() => showSoon("Email sign-in")}
+        className={authSoonButtonClassName}
+      >
+        Continue with email — coming soon
+      </button>
+
+      <div className="pt-4">
+        <p className="mb-3 text-center text-sm text-muted-foreground">Get notified when sign-in opens</p>
+        <WaitlistForm source="login" submitLabel="Notify me" />
+      </div>
     </AuthShell>
   );
 }
