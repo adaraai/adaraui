@@ -27,25 +27,33 @@ export function NewsCard({ post, featured = false }: NewsCardProps) {
         {post.image ? (
           <img
             src={post.image}
-            alt=""
+            alt={post.imageHasLabel ? post.label : ""}
             loading="lazy"
             decoding="async"
-            className="absolute inset-0 h-full w-full object-cover"
+            className={cn(
+              "absolute inset-0 h-full w-full object-cover",
+              post.imageHasLabel &&
+                "transition-transform duration-300 group-hover:scale-[1.03]"
+            )}
             style={{ objectPosition: post.imagePosition ?? "center" }}
           />
         ) : null}
-        <div
-          className={cn(
-            "absolute inset-0 bg-gradient-to-br transition-opacity duration-300",
-            post.gradient,
-            post.image ? "opacity-85 group-hover:opacity-75" : "opacity-100"
-          )}
-        />
-        <div className="absolute inset-0 flex items-center justify-center p-4">
-          <span className="text-center text-lg font-medium tracking-[-0.02em] text-white sm:text-xl">
-            {post.label}
-          </span>
-        </div>
+        {post.imageHasLabel ? null : (
+          <>
+            <div
+              className={cn(
+                "absolute inset-0 bg-gradient-to-br transition-opacity duration-300",
+                post.gradient,
+                post.image ? "opacity-85 group-hover:opacity-75" : "opacity-100"
+              )}
+            />
+            <div className="absolute inset-0 flex items-center justify-center p-4">
+              <span className="text-center text-lg font-medium tracking-[-0.02em] text-white sm:text-xl">
+                {post.label}
+              </span>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="flex min-w-0 flex-col gap-2 sm:gap-2.5">

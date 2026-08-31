@@ -1,5 +1,5 @@
 import { BentoCard } from "@/components/client/BentoCard";
-import { BentoChatDemo } from "@/components/client/showcase/BentoChatDemo";
+import { BentoTranscribeDemo } from "@/components/client/showcase/BentoTranscribeDemo";
 import { BentoPromptCarousel } from "@/components/client/showcase/BentoPromptCarousel";
 import { BentoCodeDemo } from "@/components/client/showcase/BentoCodeDemo";
 import { BentoAgentDemo } from "@/components/client/showcase/BentoAgentDemo";
@@ -17,12 +17,12 @@ export function SolutionSection() {
 
         <div className="mt-16 grid grid-cols-1 gap-3 md:h-[540px] md:grid-cols-3 md:grid-rows-2">
           <BentoCard
-            label="Chat"
+            label="Transcribe"
             href="/products"
-            cta="Try Chat"
+            cta="Try Transcribe"
             className="h-full md:col-start-1 md:row-start-1 md:row-span-2"
           >
-            <BentoChatDemo />
+            <BentoTranscribeDemo />
           </BentoCard>
 
           <BentoCard

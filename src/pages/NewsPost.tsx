@@ -78,23 +78,27 @@ export default function NewsPost() {
               {post.image ? (
                 <img
                   src={post.image}
-                  alt=""
+                  alt={post.imageHasLabel ? post.label : ""}
                   className="absolute inset-0 h-full w-full object-cover"
                   style={{ objectPosition: post.imagePosition ?? "center" }}
                 />
               ) : null}
-              <div
-                className={cn(
-                  "absolute inset-0 bg-gradient-to-br",
-                  post.gradient,
-                  post.image && "opacity-80"
-                )}
-              />
-              <div className="absolute inset-0 flex items-center justify-center p-6">
-                <span className="text-center text-2xl font-medium tracking-[-0.02em] text-white sm:text-3xl">
-                  {post.label}
-                </span>
-              </div>
+              {post.imageHasLabel ? null : (
+                <>
+                  <div
+                    className={cn(
+                      "absolute inset-0 bg-gradient-to-br",
+                      post.gradient,
+                      post.image && "opacity-80"
+                    )}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center p-6">
+                    <span className="text-center text-2xl font-medium tracking-[-0.02em] text-white sm:text-3xl">
+                      {post.label}
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="mt-10 space-y-6">
