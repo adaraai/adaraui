@@ -13,6 +13,7 @@ type BentoCardProps = {
   cta?: string;
   compact?: boolean;
   layout?: "default" | "visual";
+  surface?: "dark" | "auto";
 };
 
 export function BentoCard({
@@ -25,8 +26,10 @@ export function BentoCard({
   cta = "Explore",
   compact = false,
   layout = "default",
+  surface = "dark",
 }: BentoCardProps) {
   const isVisual = layout === "visual";
+  const autoSurface = isVisual && surface === "auto";
   const isTiled = isVisual && !image && Boolean(children);
   const hasVisual = Boolean(image) || isVisual;
 
@@ -35,7 +38,7 @@ export function BentoCard({
       to={href}
       className={cn(
         "group relative isolate flex flex-col overflow-hidden rounded-2xl ring-0 ring-inset transition-[box-shadow,ring-width,ring-color] duration-300 hover:ring-1 hover:ring-border",
-        hasVisual ? "bg-[#0a0a0a]" : "bg-muted dark:bg-card",
+        hasVisual ? (autoSurface ? "bg-muted dark:bg-card" : "bg-[#0a0a0a]") : "bg-muted dark:bg-card",
         compact ? "min-h-0" : "min-h-[220px] h-full",
         isTiled && "p-1.5 sm:p-2",
         className
@@ -90,8 +93,8 @@ export function BentoCard({
         <span
           className={cn(
             "min-w-0 truncate font-medium tracking-[-0.02em]",
-            hasVisual ? "text-white" : "text-foreground",
-            isVisual && "drop-shadow-[0_1px_10px_rgba(0,0,0,0.75)]",
+            hasVisual && !autoSurface ? "text-white" : "text-foreground",
+            isVisual && !autoSurface && "drop-shadow-[0_1px_10px_rgba(0,0,0,0.75)]",
             isVisual ? "text-lg sm:text-xl" : compact ? "text-[15px]" : "text-lg sm:text-xl"
           )}
         >
@@ -100,10 +103,10 @@ export function BentoCard({
         <span
           className={cn(
             "inline-flex shrink-0 items-center gap-1 text-sm transition-colors",
-            hasVisual
+            hasVisual && !autoSurface
               ? "text-white/80 group-hover:text-white"
               : "text-muted-foreground group-hover:text-foreground",
-            isVisual && "drop-shadow-[0_1px_10px_rgba(0,0,0,0.75)]"
+            isVisual && !autoSurface && "drop-shadow-[0_1px_10px_rgba(0,0,0,0.75)]"
           )}
         >
           {cta}

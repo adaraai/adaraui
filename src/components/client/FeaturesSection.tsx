@@ -2,6 +2,7 @@ import { BentoCard } from "@/components/client/BentoCard";
 import { BentoPromptCarousel } from "@/components/client/showcase/BentoPromptCarousel";
 import { BentoCodeDemo } from "@/components/client/showcase/BentoCodeDemo";
 import { ModelsPreview } from "@/components/client/showcase/ModelsPreview";
+import { ProductsVisual } from "@/components/client/showcase/ProductsVisual";
 import { SecurityVisual } from "@/components/client/showcase/SecurityVisual";
 
 export function FeaturesSection() {
@@ -50,18 +51,18 @@ export function FeaturesSection() {
             label="Products"
             href="/products"
             cta="Explore"
-            compact
             layout="visual"
-            image="/assets/adara-cta.webp"
-            imagePosition="center top"
             className="min-h-[16.5rem] md:col-span-3 md:h-full"
-          />
+          >
+            <ProductsVisual />
+          </BentoCard>
 
           <BentoCard
             label="Security"
             href="/products"
             cta="Explore"
             layout="visual"
+            surface="auto"
             className="min-h-[16.5rem] md:col-span-3 md:h-full"
           >
             <SecurityVisual />
